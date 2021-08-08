@@ -1,26 +1,26 @@
 const express = require("express");
-const cors = require("cors");
-const port = 1000;
-
 const app = express();
+const port = 1000;
+const cors = require("cors");
+const path = require("path");
 
-app.use(cors());
+require("./db");
+
+require("dotenv").config();
+
+app.use("/images", express.static(path.join(__dirname, "images")));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
-// app.use("", require("./routes/"));
-// app.use("", require("./routes/"));
+app.use("/users", require("./routes/users"));
 
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
-
-const { myQuery } = require("./config/db");
-
-app.get("/", async (req, res) => {
-  console.log("object");
-  const user = await myQuery(`SELECT * FROM users`);
-  console.log(user);
-  res.json(user);
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
 app.listen(port, () => {

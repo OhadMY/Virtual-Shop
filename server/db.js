@@ -1,22 +1,3 @@
-// const mysql = require("mysql");
-
-// const connectToSQL = async () => {
-//   try {
-//     await mysql.createConnection({
-//       host: "localhost",
-//       user: "root",
-//       password: "",
-//       database: "fourth_project",
-//     });
-
-//     console.log("Connected to SQL");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-// module.exports = { connectToSQL };
-
 const mysql = require("mysql");
 
 const con = mysql.createConnection({
