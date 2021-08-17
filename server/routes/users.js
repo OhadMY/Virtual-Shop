@@ -47,8 +47,7 @@ router.post("/login", async (req, res) => {
     // generate token and send it back to the user
     jwt.sign(
       {
-        userID: user.userID,
-        userType: user.userType,
+        user,
       },
       process.env.JWT_SECRET,
       { expiresIn: "7d" },
@@ -64,7 +63,7 @@ router.post("/login", async (req, res) => {
       }
     );
   } catch (error) {
-    res.status(500).send("error");
+    res.status(500).send(error);
   }
 });
 
@@ -105,11 +104,8 @@ router.post("/register", async (req, res) => {
     const newUser = await myQuery(`
     INSERT INTO users (userId, firstName, lastName, eMail, userPassword, city, street) VALUES (${userId},"${firstName}", "${lastName}", "${eMail}", "${hash}", "${city}", "${street}")
     `);
-    // create new user cart
-    const test = await myQuery(
-      `INSERT INTO shoppingCarts (userCartId) VALUES (${userId});`
-    );
-    console.log(test);
+    // create new user shopping cart
+    myQuery(`INSERT INTO shoppingCarts (userCartId) VALUES (${userId});`);
     res.status(201).send(newUser);
   } catch (error) {
     res.status(500).send(error);

@@ -24,41 +24,39 @@ categoryName VARCHAR(60),
 PRIMARY KEY (prodCategoryId)
 );
 
-INSERT INTO prodCategory (categoryName) VALUES ("Dairy"),("Bakery"),("Meat"),("Soft drinks"),("Frozen");
+INSERT INTO prodCategory (categoryName) VALUES ("Dairy"),("Bakery"),("Meat"),("Drinks"),("Frozen");
 
 CREATE TABLE products (
 prodId INT AUTO_INCREMENT,
 categoryId INT,
 prodName VARCHAR(60),
-prodPrice VARCHAR(10) ,
+prodPrice INT,
 prodImage VARCHAR(255),
 FOREIGN KEY (categoryId) REFERENCES prodCategory(prodCategoryId),
 PRIMARY KEY (prodId)
 );
 
 INSERT INTO products (categoryId,prodName,prodPrice,prodImage) VALUES 
-(2,"4 Bistro Brioche Burger Buns","3","http://localhost:1000/images/Bakery/4 Bistro Brioche Burger Buns.jpg"),
-(2,"6 Sliced Hot Dog Rolls","4","http://localhost:1000/images/Bakery/6 Sliced Hot Dog Rolls.jpg"),
-(2,"6 Tortilla Wraps","5","http://localhost:1000/images/Bakery/6 Tortilla Wraps.jpg"),
-(2,"Sliced White Bread","2","http://localhost:1000/images/Bakery/Sliced White Bread.jpg"),
-(1,"Butterly Spread 500g","3.50","http://localhost:1000/images/Dairy/Butterly Spread 500g.jpg"),
-(1,"Mozzarella 125g","4.70","http://localhost:1000/images/Dairy/Mozzarella 125g.jpg"),
-(1,"Natural Yogurt 500g","2.50","http://localhost:1000/images/Dairy/Natural Yogurt 500g.jpg"),
-(1,"Semi Skimmed Milk 2L","4.70","http://localhost:1000/images/Dairy/Semi Skimmed Milk 2L.jpg"),
-(3,"Wagyu Beef Burger 170g","24.50","http://localhost:1000/images/Meat/Wagyu Beef Burger 170g.jpg"),
-(3,"Range Pork Chops 520g","19.25","http://localhost:1000/images/Meat/Range Pork Chops 520g.jpg"),
-(3,"British Rack of Lamb 375g","18.75","http://localhost:1000/images/Meat/British Rack of Lamb 375g.jpg"),
-(3,"Field Tuna Steak 300g","16.30","http://localhost:1000/images/Meat/Field Tuna Steak 300g.jpg"),
-(4,"Coca Cola 1.5L","2.70","http://localhost:1000/images/Soft drinks/Coca Cola 1.5L.jpg"),
-(4,"Pepsi Max No Sugar 2L","2.30","http://localhost:1000/images/Soft drinks/Pepsi Max No Sugar 2L.jpg"),
-(4,"Lipton Ice Tea Peach 1.25L","3","http://localhost:1000/images/Soft drinks/Lipton Ice Tea Peach 1.25L.jpg"),
-(4,"Sprite Lemon Lime 2L","2.50","http://localhost:1000/images/Soft drinks/Sprite Lemon Lime 2L.jpg"),
-(5,"10 Garlic Bread Slices","7.50","http://localhost:1000/images/Frozen/10 Garlic Bread Slices.jpg"),
-(5,"Onion Rings","8.30","http://localhost:1000/images/Frozen/Onion Rings.jpg"),
-(5,"Ristorante Mozzarella Pizza","10.50","http://localhost:1000/images/Frozen/Ristorante Mozzarella Pizza.jpg"),
-(5,"6 Classico Ice Cream Cone","9","http://localhost:1000/images/Frozen/6 Classico Ice Cream Cone.jpg");
-
-SELECT * FROM products WHERE categoryId=2;
+(2,"4 Bistro Brioche Burger Buns",3,"http://localhost:1000/images/Bakery/4BistroBriocheBurgerBuns.jpg"),
+(2,"6 Sliced Hot Dog Rolls",4,"http://localhost:1000/images/Bakery/6SlicedHotDogRolls.jpg"),
+(2,"6 Tortilla Wraps",5,"http://localhost:1000/images/Bakery/6TortillaWraps.jpg"),
+(2,"Sliced White Bread",2,"http://localhost:1000/images/Bakery/SlicedWhiteBread.jpg"),
+(1,"Butterly Spread 500g",3.50,"http://localhost:1000/images/Dairy/ButterlySpread500g.jpg"),
+(1,"Mozzarella 125g",4.70,"http://localhost:1000/images/Dairy/Mozzarella125g.jpg"),
+(1,"Natural Yogurt 500g",2.50,"http://localhost:1000/images/Dairy/NaturalYogurt500g.jpg"),
+(1,"Semi Skimmed Milk 2L",4.70,"http://localhost:1000/images/Dairy/SemiSkimmedMilk2L.jpg"),
+(3,"Wagyu Beef Burger 170g",24.50,"http://localhost:1000/images/Meat/WagyuBeefBurger170g.jpg"),
+(3,"Range Pork Chops 520g",19.25,"http://localhost:1000/images/Meat/RangePorkChops520g.jpg"),
+(3,"British Rack of Lamb 375g",18.75,"http://localhost:1000/images/Meat/BritishRackofLamb375g.jpg"),
+(3,"Field Tuna Steak 300g",16.30,"http://localhost:1000/images/Meat/FieldTunaSteak300g.jpg"),
+(4,"Coca Cola 1.5L",2.70,"http://localhost:1000/images/Drinks/CocaCola1.5L.jpg"),
+(4,"Pepsi Max No Sugar 2L",2.30,"http://localhost:1000/images/Drinks/PepsiMaxNoSugar2L.jpg"),
+(4,"Lipton Ice Tea Peach 1.25L",3,"http://localhost:1000/images/Drinks/LiptonIceTeaPeach1.25L.jpg"),
+(4,"Sprite Lemon Lime 2L",2.50,"http://localhost:1000/images/Drinks/SpriteLemonLime2L.jpg"),
+(5,"10 Garlic Bread Slices",7.50,"http://localhost:1000/images/Frozen/10GarlicBreadSlices.jpg"),
+(5,"Onion Rings",8.30,"http://localhost:1000/images/Frozen/OnionRings.jpg"),
+(5,"Ristorante Mozzarella Pizza",10.50,"http://localhost:1000/images/Frozen/RistoranteMozzarellaPizza.jpg"),
+(5,"6 Classico Ice Cream Cone",9,"http://localhost:1000/images/Frozen/6ClassicoIceCreamCone.jpg");
 
 CREATE TABLE shoppingCarts (
 shoppingCartId INT AUTO_INCREMENT,
@@ -70,9 +68,7 @@ PRIMARY KEY (shoppingCartId)
 );
 
 INSERT INTO shoppingCarts (userCartId) VALUES (311286074);
-SELECT * FROM shoppingCarts;
 
--- start fix here
 CREATE TABLE prodInCart (
 prodInCartId INT AUTO_INCREMENT,
 quantity INT,
@@ -82,7 +78,6 @@ prodCartId INT,
 FOREIGN KEY (prodCartId) REFERENCES products(prodId),
 PRIMARY KEY (prodInCartId)
 );
--- end fix here
 
 INSERT INTO ProdInCart (cartId,quantity,prodCartId) VALUES (1,4,3);
 select * from ProdInCart;
@@ -92,8 +87,11 @@ FROM prodInCart JOIN
      prodInCart.prodCartId = products.prodId
      -- groupby prodInCartId sums up each product in every cart
      -- groupby cartId sums up all products in each cart
-GROUP BY prodInCart.cartId;
-DELETE FROM prodInCart WHERE prodInCartId = 2;
+GROUP BY prodInCart.prodInCartId;
+DELETE FROM prodInCart WHERE prodInCartId = 1;
+UPDATE ProdInCart SET quantity=quantity-1 WHERE prodInCartId = 1;
+SELECT * FROM shoppingCarts;
+SELECT * FROM products;
 
 CREATE TABLE orders (
 orderId INT AUTO_INCREMENT,

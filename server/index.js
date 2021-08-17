@@ -18,6 +18,8 @@ app.use(
 app.use(express.json());
 
 app.use("/users", require("./routes/users"));
+app.use("/products", require("./routes/products"));
+app.use("/shoppingcarts", require("./routes/shoppingcarts"));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

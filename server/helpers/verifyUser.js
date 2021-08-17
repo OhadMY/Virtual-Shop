@@ -12,7 +12,7 @@ function verifyUser(req, res, next) {
     });
   } catch (error) {
     if (error) {
-      return res.status(401).send(error);
+      return res.status(401).send({ error: "No connected User" });
     }
     next();
   }
