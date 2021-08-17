@@ -2,6 +2,15 @@ const router = require("express").Router();
 const { myQuery } = require("../db");
 const { verifyUser, verifyAdmin } = require("../helpers/verifyUser");
 
+router.get("/totalorders", verifyUser, async (req, res) => {
+  try {
+    const totalorders = await myQuery("SELECT COUNT(orderId) FROM orders;");
+    res.status(200).send(totalorders);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.post("/addproduct/:prodId", verifyUser, async (req, res) => {
   try {
     const { prodId } = req.params;

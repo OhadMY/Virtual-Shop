@@ -1,0 +1,88 @@
+<mat-card class="h-100">
+  <mat-card-title>
+    <!-- {{ !userName ? "Hello Guest" : dynamicGreeting }} {{ userName }} -->
+    Hello User
+  </mat-card-title>
+
+  <!-- <div *ngIf="isUserConnected">
+    <mat-card-actions>
+      <button mat-raised-button color="accent" (click)="goToShoppingPage()">
+        {{ openCart ? "Resume shopping" : "Go Shopping" }}
+      </button>
+    </mat-card-actions>
+
+    <mat-card-subtitle *ngIf="welcomeMessage">{{
+      welcomeMessage
+    }}</mat-card-subtitle>
+
+    <mat-card-subtitle *ngIf="openCart">
+      Open Cart ${{ openCart.totalPrice }} from {{ openCart.created_at }}
+    </mat-card-subtitle>
+  </div>
+
+  <mat-card-actions *ngIf="isAdminConnected">
+    <button mat-raised-button color="accent" (click)="goToShoppingPage()">
+      Products Management
+    </button>
+  </mat-card-actions> -->
+
+  <div>
+    <!-- <mat-card-subtitle *ngIf="!isAuthenticated">Register?</mat-card-subtitle> -->
+    <mat-card-content>
+      <form
+        [formGroup]="loginForm"
+        fxLayout="column"
+        fxLayoutAlign="start start"
+        fxLayoutGap="15px"
+      >
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="userName"
+            type="userName"
+            placeholder="ID"
+          />
+          <mat-icon matSuffix>face</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="password"
+            type="password"
+            placeholder="Password"
+          />
+          <mat-icon matSuffix>visibility_off</mat-icon>
+        </mat-form-field>
+
+        <!-- <div *ngIf="errorMessage" class="error">
+          {{ errorMessage }}
+        </div> -->
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button type="button" mat-raised-button color="primary">
+        <!-- (click)="login()" -->
+        Login
+      </button>
+      <button mat-raised-button color="accent" routerLink="/register">
+        Register
+      </button>
+    </mat-card-actions>
+  </div>
+  <!-- <img
+    (click)="goToShoppingPage()"
+    class="open-sign fade-in"
+    mat-card-image
+    *ngIf="isUserConnected && !openCart"
+    src="https://cdn.pixabay.com/photo/2014/04/02/11/11/welcome-305504_1280.png"
+  />
+  <img
+    (click)="goToShoppingPage()"
+    class="open-sign fade-in"
+    mat-card-image
+    *ngIf="isUserConnected && openCart"
+    src="https://cdn.pixabay.com/photo/2020/02/26/07/41/grocery-basket-4880912_1280.png"
+  /> -->
+</mat-card>

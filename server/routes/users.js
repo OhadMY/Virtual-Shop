@@ -24,16 +24,14 @@ router.post("/logout", verifyUser, async (req, res, next) => {
 router.post("/login", async (req, res) => {
   try {
     // make sure all info exists
-    const { userId, userPassword } = req.body;
-    if (!userId || !userPassword) {
+    const { eMail, userPassword } = req.body;
+    if (!eMail || !userPassword) {
       return res.status(400).send("Missing some info...");
     }
     // get users array from db
-    const users = await myQuery(
-      `SELECT * FROM users WHERE userId = "${userId}"`
-    );
+    const users = await myQuery(`SELECT * FROM users WHERE eMail = "${eMail}"`);
     const user = users[0];
-    // make sure userId registered
+    // make sure eMail registered
     if (!user) {
       return res.status(401).send("Invalid Credentials");
     }

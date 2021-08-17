@@ -1,0 +1,16 @@
+a {
+  text-decoration: none;
+  color: white;
+  font-size: xx-large;
+}
+
+span {
+  color: white;
+  cursor: pointer;
+}
+
+.contact-us {
+  text-decoration: none;
+  color: white;
+  font-size: large;
+}

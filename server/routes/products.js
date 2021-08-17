@@ -11,6 +11,15 @@ router.get("/", verifyUser, async (req, res) => {
   }
 });
 
+router.get("/totalproducts", verifyUser, async (req, res) => {
+  try {
+    const totalproducts = await myQuery("SELECT COUNT(prodId) FROM products;");
+    res.status(200).send(totalproducts);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.get("/:prodCategoryId", verifyUser, async (req, res) => {
   try {
     const { prodCategoryId } = req.params;
