@@ -1,13 +1,14 @@
 <mat-card class="h-100">
-  <!-- <img
+  <img
+    class="image"
     mat-card-image
-    src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80"
+    src="http://localhost:1000/images/MyStore.jpg"
     alt="image"
-  /> -->
+  />
   <mat-card-content fxLayoutAlign="center"
-    >Available products in our store - 0</mat-card-content
-  >
+    >Available products in our store - {{ numOfProducts }}
+  </mat-card-content>
   <mat-card-content fxLayoutAlign="center"
-    >Orders submitted in our store - 0</mat-card-content
+    >Orders submitted in our store - {{ numOfOrders }}</mat-card-content
   >
 </mat-card>

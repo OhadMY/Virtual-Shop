@@ -11,7 +11,7 @@ require("dotenv").config();
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://localhost:4200",
     credentials: true,
   })
 );

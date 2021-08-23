@@ -1,10 +1,8 @@
-<mat-card class="h-100">
-  <mat-card-title>
-    <!-- {{ !userName ? "Hello Guest" : dynamicGreeting }} {{ userName }} -->
-    Hello User
-  </mat-card-title>
-
-  <!-- <div *ngIf="isUserConnected">
+<mat-grid-list cols="3" class="my-grid-list">
+  <mat-grid-tile class="my-grid-tile">
+    <mat-card>
+      <mat-card-title> Login Panel </mat-card-title>
+      <!-- <div *ngIf="isUserConnected">
     <mat-card-actions>
       <button mat-raised-button color="accent" (click)="goToShoppingPage()">
         {{ openCart ? "Resume shopping" : "Go Shopping" }}
@@ -26,52 +24,61 @@
     </button>
   </mat-card-actions> -->
 
-  <div>
-    <!-- <mat-card-subtitle *ngIf="!isAuthenticated">Register?</mat-card-subtitle> -->
-    <mat-card-content>
-      <form
-        [formGroup]="loginForm"
-        fxLayout="column"
-        fxLayoutAlign="start start"
-        fxLayoutGap="15px"
-      >
-        <mat-form-field>
-          <input
-            matInput
-            formControlName="userName"
-            type="userName"
-            placeholder="ID"
-          />
-          <mat-icon matSuffix>face</mat-icon>
-        </mat-form-field>
+      <div paddingTop="50px">
+        <mat-card-content>
+          <form
+            [formGroup]="loginForm"
+            fxLayout="column"
+            fxLayoutAlign="start start"
+            fxLayoutGap="15px"
+          >
+            <mat-form-field>
+              <input
+                matInput
+                formControlName="username"
+                type="email"
+                placeholder="eMail"
+              />
+              <mat-error *ngIf="requiredValidation1('username')">
+                {{ requiredMsg }}
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('username').errors?.email">
+                Please provide a valid Email address.
+              </mat-error>
+            </mat-form-field>
 
-        <mat-form-field>
-          <input
-            matInput
-            formControlName="password"
-            type="password"
-            placeholder="Password"
-          />
-          <mat-icon matSuffix>visibility_off</mat-icon>
-        </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                formControlName="password"
+                type="password"
+                placeholder="Password"
+              />
+              <mat-error *ngIf="requiredValidation1('password')">
+                {{ requiredMsg }}
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </mat-card-content>
 
-        <!-- <div *ngIf="errorMessage" class="error">
-          {{ errorMessage }}
-        </div> -->
-      </form>
-    </mat-card-content>
-
-    <mat-card-actions>
-      <button type="button" mat-raised-button color="primary">
-        <!-- (click)="login()" -->
-        Login
-      </button>
-      <button mat-raised-button color="accent" routerLink="/register">
-        Register
-      </button>
-    </mat-card-actions>
-  </div>
-  <!-- <img
+        <mat-card-actions>
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="
+              _data.login(loginForm.value.username, loginForm.value.password)
+            "
+            [disabled]="loginForm.invalid"
+          >
+            Login
+          </button>
+          <button mat-raised-button color="accent" routerLink="/register">
+            Register
+          </button>
+        </mat-card-actions>
+      </div>
+      <!-- <img
     (click)="goToShoppingPage()"
     class="open-sign fade-in"
     mat-card-image
@@ -85,4 +92,10 @@
     *ngIf="isUserConnected && openCart"
     src="https://cdn.pixabay.com/photo/2020/02/26/07/41/grocery-basket-4880912_1280.png"
   /> -->
-</mat-card>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile class="my-grid-tile"><app-about></app-about></mat-grid-tile>
+  <mat-grid-tile class="my-grid-tile"
+    ><app-statistics></app-statistics
+  ></mat-grid-tile>
+</mat-grid-list>

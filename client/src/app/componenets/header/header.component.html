@@ -1,11 +1,17 @@
 <mat-toolbar color="primary" fxLayoutAlign="space-between center">
-  <a routerLink="/home">My Store &nbsp;</a>
-  <!-- <span (click)="showCart()" *ngIf="adminConnected" fxLayout> 
+  <mat-toolbar-row>
+    <a routerLink="/home">My Store</a>
+    <!-- <span (click)="showCart()" *ngIf="adminConnected" fxLayout> 
         {{ adminConnected }} <mat-icon fxFlexAlign="center">settings</mat-icon>
     </span> -->
-  <!-- <app-cart-indicator *ngIf="showCartIndicator"></app-cart-indicator> -->
-  <!-- <a class="contact-us" routerLink="/contact-us" *ngIf="!isAuthenticated">
+    <!-- <app-cart-indicator *ngIf="showCartIndicator"></app-cart-indicator> -->
+    <!-- <a class="contact-us" routerLink="/contact-us" *ngIf="!isAuthenticated">
         Contact Us <mat-icon>contact_support</mat-icon>
     </a> -->
-  <!-- <button mat-stroked-button color="accent" (click)="logout()" *ngIf="isAuthenticated">Logout</button>  -->
+    <!-- <button mat-stroked-button color="accent" (click)="logout()" *ngIf="isAuthenticated">Logout</button>  -->
+    <span class="example-spacer"></span>
+    <button mat-stroked-button color="warn" (click)="_data.logout()">
+      Logout
+    </button>
+  </mat-toolbar-row>
 </mat-toolbar>

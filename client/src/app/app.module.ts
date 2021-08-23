@@ -9,13 +9,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AboutComponent } from './componenets/about/about.component';
 import { HeaderComponent } from './componenets/header/header.component';
 import { HomeComponent } from './componenets/home/home.component';
 import { LoginComponent } from './componenets/login/login.component';
 import { StatisticsComponent } from './componenets/statistics/statistics.component';
+import { RegisterComponent } from './componenets/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,7 @@ import { StatisticsComponent } from './componenets/statistics/statistics.compone
     HomeComponent,
     LoginComponent,
     StatisticsComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +41,11 @@ import { StatisticsComponent } from './componenets/statistics/statistics.compone
     MatFormFieldModule,
     MatGridListModule,
     ReactiveFormsModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatStepperModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

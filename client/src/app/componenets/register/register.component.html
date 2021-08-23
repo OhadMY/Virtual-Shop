@@ -1,0 +1,165 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title> Register </mat-card-title>
+    <mat-vertical-stepper #stepper linear>
+      <mat-step [stepControl]="registerForm1">
+        <form
+          [formGroup]="registerForm1"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+        >
+          <ng-template matStepLabel>Fill out account details</ng-template>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="ID"
+              formControlName="id"
+              type="number"
+            />
+            <mat-error *ngIf="requiredValidation1('id')">
+              {{ requiredMsg }}
+            </mat-error>
+            <mat-error *ngIf="registerForm1.get('id').errors?.min">
+              ID must be 9 digits long.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              formControlName="userName"
+              type="email"
+              placeholder="Email"
+            />
+            <mat-error *ngIf="requiredValidation1('userName')">
+              {{ requiredMsg }}
+            </mat-error>
+            <mat-error *ngIf="registerForm1.get('userName').errors?.email">
+              Please provide a valid Email address.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Password"
+              formControlName="password"
+              type="password"
+            />
+            <mat-error *ngIf="requiredValidation1('password')">
+              {{ requiredMsg }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Password Confirm"
+              formControlName="passwordConfirm"
+              type="password"
+            />
+            <mat-error *ngIf="requiredValidation1('passwordConfirm')">
+              {{ requiredMsg }}
+            </mat-error>
+            <mat-hint
+              [ngStyle]="{ color: hintColor }"
+              *ngIf="registerForm1.errors?.misMatch"
+            >
+              Confirm password is not matching.
+            </mat-hint>
+          </mat-form-field>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="registerForm2">
+        <form
+          [formGroup]="registerForm2"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+        >
+          <ng-template matStepLabel>Fill out user details</ng-template>
+
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city" required>
+              <mat-option *ngFor="let city of cities" value="{{ city }}">{{
+                city
+              }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="requiredValidation2('city')">{{
+              requiredMsg
+            }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Street"
+              formControlName="street"
+              type="text"
+            />
+            <mat-error *ngIf="requiredValidation2('street')">{{
+              requiredMsg
+            }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="First Name"
+              formControlName="firstName"
+              type="text"
+            />
+            <mat-error *ngIf="requiredValidation2('firstName')">{{
+              requiredMsg
+            }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Last Name"
+              formControlName="lastName"
+              type="text"
+            />
+            <mat-error *ngIf="requiredValidation2('lastName')">{{
+              requiredMsg
+            }}</mat-error>
+          </mat-form-field>
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <h3 fxLayoutAlign="center center">You are now done.</h3>
+        <div fxLayoutAlign="center center">
+          <button mat-button matStepperPrevious>Back</button>
+          <button
+            mat-button
+            (click)="
+              _data.register(
+                registerForm1.value.userName,
+                registerForm1.value.password,
+                registerForm1.value.id,
+                registerForm2.value.city,
+                registerForm2.value.street,
+                registerForm2.value.firstName,
+                registerForm2.value.lastName
+              )
+            "
+          >
+            Submit
+          </button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-card>
+</div>

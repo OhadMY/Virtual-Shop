@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-statistics',
@@ -6,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./statistics.component.css'],
 })
 export class StatisticsComponent implements OnInit {
-  constructor() {}
+  public numOfProducts: any;
+  public numOfOrders: any;
 
-  ngOnInit(): void {}
+  constructor(public _data: DataService) {}
+
+  ngOnInit(): void {
+    this._data.getTotalProds().then((res) => {
+      this.numOfProducts = res;
+    });
+    this._data.getTotalOrders().then((res) => {
+      this.numOfOrders = res;
+    });
+  }
 }

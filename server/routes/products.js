@@ -11,10 +11,13 @@ router.get("/", verifyUser, async (req, res) => {
   }
 });
 
-router.get("/totalproducts", verifyUser, async (req, res) => {
+router.get("/totalproducts", async (req, res) => {
   try {
-    const totalproducts = await myQuery("SELECT COUNT(prodId) FROM products;");
-    res.status(200).send(totalproducts);
+    const totalproducts = await myQuery(
+      "SELECT COUNT(prodId) AS Total FROM products;"
+    );
+    const total = totalproducts[0]["Total"];
+    res.status(200).send(total.toString());
   } catch (error) {
     res.status(500).send(error);
   }
@@ -26,6 +29,7 @@ router.get("/:prodCategoryId", verifyUser, async (req, res) => {
     const products = await myQuery(
       `SELECT * FROM products WHERE categoryId=${prodCategoryId}`
     );
+    console.log(products);
     res.status(200).send(products);
   } catch (error) {
     res.status(500).send(error);
