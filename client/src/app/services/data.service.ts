@@ -8,7 +8,7 @@ import UsersModel from '../models/users.model';
 export class DataService {
   public connectedUser: UsersModel;
   public isAdmin = null;
-  public isConnected = false;
+  public isConnected: boolean = false;
 
   constructor(public _r: Router) {}
 
@@ -53,8 +53,7 @@ export class DataService {
         if (this.connectedUser.userType === 1) this.isAdmin = false;
         else this.isAdmin = true;
         this.isConnected = true;
-        console.log(this.isConnected);
-        this._r.navigateByUrl('/home');
+        window.location.href = 'http://localhost:4200/home';
       } else {
         console.log(JSON.stringify(data));
         alert('Wrong Credentials');
@@ -75,7 +74,7 @@ export class DataService {
       });
       localStorage.clear();
       this.isConnected = false;
-      this._r.navigateByUrl('/login');
+      window.location.href = 'http://localhost:4200/home';
     } catch (error) {
       console.log(error);
     }

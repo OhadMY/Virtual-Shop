@@ -7,7 +7,17 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  public isAuthenticated: boolean = false;
+
   constructor(public _data: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    try {
+      const jwt = localStorage.getItem('token');
+      let jwtData = jwt.split('.')[1];
+      this.isAuthenticated = true;
+    } catch (error) {
+      this.isAuthenticated = false;
+    }
+  }
 }

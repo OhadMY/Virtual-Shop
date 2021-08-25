@@ -115,7 +115,7 @@ router.post("/register", async (req, res) => {
 
 // Mail validation function
 function validateEmail(eMailAdress) {
-  var eMailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  let eMailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return eMailPattern.test(eMailAdress);
 }
 

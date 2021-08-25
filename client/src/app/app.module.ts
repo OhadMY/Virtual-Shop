@@ -21,6 +21,7 @@ import { HomeComponent } from './componenets/home/home.component';
 import { LoginComponent } from './componenets/login/login.component';
 import { StatisticsComponent } from './componenets/statistics/statistics.component';
 import { RegisterComponent } from './componenets/register/register.component';
+import { StoreComponent } from './componenets/store/store.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegisterComponent } from './componenets/register/register.component';
     LoginComponent,
     StatisticsComponent,
     RegisterComponent,
+    StoreComponent,
   ],
   imports: [
     BrowserModule,

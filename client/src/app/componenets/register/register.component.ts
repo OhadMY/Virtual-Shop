@@ -10,6 +10,7 @@ import { passwordValidator } from './custom-validators';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  public eMailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   public isLinear: boolean = false;
   public registerForm1: FormGroup;
   public registerForm2: FormGroup;
@@ -33,7 +34,10 @@ export class RegisterComponent implements OnInit {
     this.registerForm1 = this.formBuilder.group(
       {
         id: [null, [Validators.required, Validators.min(100000000)]],
-        userName: [null, [Validators.required, Validators.email]],
+        userName: [
+          null,
+          [Validators.required, Validators.pattern(this.eMailPattern)],
+        ],
         password: [null, Validators.required],
         passwordConfirm: [null, Validators.required],
       },
