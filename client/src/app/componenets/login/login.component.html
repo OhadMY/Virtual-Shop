@@ -14,7 +14,8 @@
     }}</mat-card-subtitle>
 
     <mat-card-subtitle *ngIf="openCart">
-      Open Cart ${{ openCart.totalPrice }} from {{ openCart.created_at }}
+      Open Cart ${{ openCart.totalPrice }} from
+      {{ openCart.cartCreationTime }}
     </mat-card-subtitle>
   </div>
 
@@ -80,18 +81,18 @@
       </button>
     </mat-card-actions>
   </div>
-  <!-- <img
-    (click)="goToShoppingPage()"
-    class="open-sign fade-in"
+  <img
+    routerLink="/store"
+    class="image"
     mat-card-image
     *ngIf="isUserConnected && !openCart"
     src="https://cdn.pixabay.com/photo/2014/04/02/11/11/welcome-305504_1280.png"
   />
   <img
-    (click)="goToShoppingPage()"
-    class="open-sign fade-in"
+    routerLink="/store"
+    class="image"
     mat-card-image
     *ngIf="isUserConnected && openCart"
     src="https://cdn.pixabay.com/photo/2020/02/26/07/41/grocery-basket-4880912_1280.png"
-  /> -->
+  />
 </mat-card>

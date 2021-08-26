@@ -2,3 +2,10 @@ form {
   display: flex;
   flex-direction: column;
 }
+
+.image {
+  width: 150px;
+  display: flex;
+  margin: auto;
+  padding-bottom: 15px;
+}

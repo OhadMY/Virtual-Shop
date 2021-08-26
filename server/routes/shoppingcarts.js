@@ -14,6 +14,27 @@ router.get("/totalorders", async (req, res) => {
   }
 });
 
+router.get("/usercart/:userId", async (req, res) => {
+  const { userId } = req.params;
+  console.log(userId);
+  try {
+    const usercart = await myQuery(
+      `SELECT * FROM shoppingCarts WHERE userCartId = ${userId} AND cartStatus=0`
+    );
+    if (usercart.length === 0) {
+      await myQuery(
+        `INSERT INTO shoppingCarts (userCartId) VALUES (${userId});`
+      );
+      const newcart = await myQuery(
+        `SELECT * FROM shoppingCarts WHERE userCartId = ${userId} AND cartStatus=0`
+      );
+      res.status(200).send(newcart);
+    } else res.status(200).send(usercart);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.post("/addproduct/:prodId", verifyUser, async (req, res) => {
   try {
     const { prodId } = req.params;

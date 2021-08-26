@@ -12,28 +12,6 @@ export class DataService {
 
   constructor(public _r: Router) {}
 
-  public async getTotalProds() {
-    try {
-      const res = await fetch('http://localhost:1000/products/totalproducts');
-      const prod = await res.json();
-      return prod;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  public async getTotalOrders() {
-    try {
-      const res = await fetch(
-        'http://localhost:1000/shoppingcarts/totalorders'
-      );
-      const order = await res.json();
-      return order;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   public async login(eMail: string, userPassword: string) {
     try {
       const res = await fetch('http://localhost:1000/users/login', {
@@ -61,22 +39,6 @@ export class DataService {
     } catch (error) {
       console.log(error);
       alert('Wrong Credentials');
-    }
-  }
-
-  public async logout() {
-    try {
-      await fetch('http://localhost:1000/users/logout', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-      });
-      localStorage.clear();
-      this.isConnected = false;
-      window.location.href = 'http://localhost:4200/home';
-    } catch (error) {
-      console.log(error);
     }
   }
 
@@ -117,6 +79,57 @@ export class DataService {
       }
     } catch (error) {
       console.log('herte');
+      console.log(error);
+    }
+  }
+
+  public async logout() {
+    try {
+      await fetch('http://localhost:1000/users/logout', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+      localStorage.clear();
+      this.isConnected = false;
+      window.location.href = 'http://localhost:4200/home';
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getTotalProds() {
+    try {
+      const res = await fetch('http://localhost:1000/products/totalproducts');
+      const prod = await res.json();
+      return prod;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getTotalOrders() {
+    try {
+      const res = await fetch(
+        'http://localhost:1000/shoppingcarts/totalorders'
+      );
+      const order = await res.json();
+      return order;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getUserCart(userId: number) {
+    try {
+      const res = await fetch(
+        `http://localhost:1000/shoppingcarts/usercart/${userId}`
+      );
+      const data = await res.json();
+      const test = data[0];
+      return test;
+    } catch (error) {
       console.log(error);
     }
   }
