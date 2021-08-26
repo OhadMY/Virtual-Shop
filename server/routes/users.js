@@ -31,7 +31,6 @@ router.post("/login", async (req, res) => {
     // get users array from db
     const users = await myQuery(`SELECT * FROM users WHERE eMail = "${eMail}"`);
     const user = users[0];
-    console.log(user);
     // make sure eMail registered
     if (!user) {
       return res.status(401).send({ Error: "Invalid Credentials" });
@@ -101,7 +100,6 @@ router.post("/register", async (req, res) => {
     }
     // encrypt password
     const hash = await bcrypt.hash(userPassword, 10);
-    console.log(hash, userPassword);
     const newUser = await myQuery(`
     INSERT INTO users (userId, firstName, lastName, eMail, userPassword, city, street) VALUES (${userId},"${firstName}", "${lastName}", "${eMail}", "${hash}", "${city}", "${street}")
     `);

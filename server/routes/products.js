@@ -29,7 +29,6 @@ router.get("/:prodCategoryId", verifyUser, async (req, res) => {
     const products = await myQuery(
       `SELECT * FROM products WHERE categoryId=${prodCategoryId}`
     );
-    console.log(products);
     res.status(200).send(products);
   } catch (error) {
     res.status(500).send(error);

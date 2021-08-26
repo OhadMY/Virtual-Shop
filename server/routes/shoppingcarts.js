@@ -16,7 +16,6 @@ router.get("/totalorders", async (req, res) => {
 
 router.get("/usercart/:userId", async (req, res) => {
   const { userId } = req.params;
-  console.log(userId);
   try {
     const usercart = await myQuery(
       `SELECT * FROM shoppingCarts WHERE userCartId = ${userId} AND cartStatus=0`

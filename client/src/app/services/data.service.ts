@@ -21,10 +21,7 @@ export class DataService {
         },
         body: JSON.stringify({ eMail, userPassword }),
       });
-      // console.log(res);
       const data = await res.json();
-      // console.log(data);
-
       if (res.status == 200) {
         localStorage.token = data.token;
         this.connectedUser = data.user;
@@ -33,7 +30,6 @@ export class DataService {
         this.isConnected = true;
         window.location.href = 'http://localhost:4200/home';
       } else {
-        console.log(JSON.stringify(data));
         alert('Wrong Credentials');
       }
     } catch (error) {
@@ -68,9 +64,7 @@ export class DataService {
           lastName,
         }),
       });
-      console.log(res);
       const data = await res.json();
-      console.log(data);
       if (res.status == 200 || res.status == 201) {
         alert('Successfully Registered !!');
         this._r.navigateByUrl('/home');
@@ -78,7 +72,6 @@ export class DataService {
         alert(JSON.stringify(data));
       }
     } catch (error) {
-      console.log('herte');
       console.log(error);
     }
   }

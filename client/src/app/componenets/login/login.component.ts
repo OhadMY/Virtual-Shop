@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-login',
@@ -39,9 +40,9 @@ export class LoginComponent implements OnInit {
         this.openCart = await this._data.getUserCart(
           decodedJwtData.user.userId
         );
-        let time = this.openCart.cartCreationTime;
-        console.log(time);
-        console.log(this.openCart);
+        this.openCart.cartCreationTime = moment(
+          this.openCart.cartCreationTime
+        ).format('DD-MM-YYYY');
       }
     } catch (error) {
       this.isAuthenticated = false;
