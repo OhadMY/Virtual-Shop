@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   public isUserConnected: boolean = false;
   public userName: string = null;
   public openCart = null;
+  public openCartTotalPrice = 0;
   public welcomeMessage: string = null;
 
   constructor(public _fb: FormBuilder, public _data: DataService) {}
@@ -43,6 +44,9 @@ export class LoginComponent implements OnInit {
         this.openCart.cartCreationTime = moment(
           this.openCart.cartCreationTime
         ).format('DD-MM-YYYY');
+        this.openCartTotalPrice = await this._data.getTotalPrice(
+          this.openCart.shoppingCartId
+        );
       }
     } catch (error) {
       this.isAuthenticated = false;

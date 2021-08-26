@@ -14,6 +14,20 @@ router.get("/totalorders", async (req, res) => {
   }
 });
 
+router.put("/closecart/:shoppingCartId", verifyUser, async (req, res) => {
+  try {
+    const { shoppingCartId } = req.params;
+    myQuery(`SET SQL_SAFE_UPDATES = 0;`);
+    const lastClosedCart = await myQuery(
+      `UPDATE shoppingCarts SET cartStatus=1 WHERE cartStatus=0 AND shoppingCartId=${shoppingCartId};`
+    );
+    myQuery(`SET SQL_SAFE_UPDATES = 1;`);
+    res.status(200).send(lastClosedCart);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.get("/usercart/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
@@ -29,6 +43,19 @@ router.get("/usercart/:userId", async (req, res) => {
       );
       res.status(200).send(newcart);
     } else res.status(200).send(usercart);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.get("/totalprice/:shoppingCartId", async (req, res) => {
+  const { shoppingCartId } = req.params;
+  try {
+    const totalPrice = await myQuery(
+      `SELECT SUM(prodInCart.quantity * products.prodPrice) AS Total 
+      FROM prodInCart JOIN products ON prodInCart.prodCartId = products.prodId WHERE cartId=${shoppingCartId} GROUP BY prodInCart.cartId ;`
+    );
+    res.status(200).send(totalPrice);
   } catch (error) {
     res.status(500).send(error);
   }

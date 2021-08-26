@@ -12,6 +12,7 @@ export class DataService {
 
   constructor(public _r: Router) {}
 
+  // User Routes
   public async login(eMail: string, userPassword: string) {
     try {
       const res = await fetch('http://localhost:1000/users/login', {
@@ -92,16 +93,7 @@ export class DataService {
     }
   }
 
-  public async getTotalProds() {
-    try {
-      const res = await fetch('http://localhost:1000/products/totalproducts');
-      const prod = await res.json();
-      return prod;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+  // ShoppingCarts Routes
   public async getTotalOrders() {
     try {
       const res = await fetch(
@@ -122,6 +114,34 @@ export class DataService {
       const data = await res.json();
       const test = data[0];
       return test;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getTotalPrice(shoppingCartId: number) {
+    try {
+      const res = await fetch(
+        `http://localhost:1000/shoppingcarts/totalprice/${shoppingCartId}`
+      );
+      console.log(res);
+      const data = await res.json();
+      if (data.length === 0) return 0;
+      else {
+        const total = data[0].Total;
+        return total;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Products Routes
+  public async getTotalProds() {
+    try {
+      const res = await fetch('http://localhost:1000/products/totalproducts');
+      const prod = await res.json();
+      return prod;
     } catch (error) {
       console.log(error);
     }
