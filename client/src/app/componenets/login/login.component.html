@@ -5,7 +5,7 @@
   <div *ngIf="isUserConnected">
     <mat-card-actions>
       <button mat-raised-button color="accent" routerLink="/store">
-        {{ openCart ? "Resume shopping" : "Go Shopping" }}
+        {{ openCartTotalPrice !== 0 ? "Resume shopping" : "Go Shopping" }}
       </button>
     </mat-card-actions>
 
@@ -13,9 +13,13 @@
       welcomeMessage
     }}</mat-card-subtitle>
 
-    <mat-card-subtitle *ngIf="openCart">
+    <mat-card-subtitle *ngIf="openCart && openCartTotalPrice !== 0">
       Open Cart ${{ openCartTotalPrice }} from
       {{ openCart.cartCreationTime }}
+    </mat-card-subtitle>
+
+    <mat-card-subtitle *ngIf="openCart && openCartTotalPrice === 0">
+      Empty Cart from {{ openCart.cartCreationTime }}
     </mat-card-subtitle>
   </div>
 

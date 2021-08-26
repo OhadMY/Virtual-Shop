@@ -124,7 +124,6 @@ export class DataService {
       const res = await fetch(
         `http://localhost:1000/shoppingcarts/totalprice/${shoppingCartId}`
       );
-      console.log(res);
       const data = await res.json();
       if (data.length === 0) return 0;
       else {
