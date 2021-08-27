@@ -12,7 +12,7 @@ import { DataService } from 'src/app/services/data.service';
 export class StoreComponent implements OnInit {
   constructor(public _r: Router, public _data: DataService) {}
 
-  public opened: boolean;
+  public opened: boolean = true;
   public isAuthenticated: boolean = false;
   public isAdminConnected: boolean = false;
   public isUserConnected: boolean = false;

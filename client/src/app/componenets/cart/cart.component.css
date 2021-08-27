@@ -1,0 +1,33 @@
+table {
+  width: 400px;
+}
+
+@media only screen and (max-width: 800px) {
+  table {
+    width: 100%;
+  }
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+img {
+  width: 40px;
+}
+
+.btn-remove {
+  color: gray;
+  cursor: pointer;
+  transition: 0.5s;
+  opacity: 0.5;
+}
+
+.btn-remove:hover {
+  color: tomato;
+  opacity: 1;
+}
+
+.icon-close {
+  color: gray;
+}

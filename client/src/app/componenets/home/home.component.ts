@@ -6,7 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  public colspan = 1;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (window.innerWidth < 1000) {
+      this.colspan = 3;
+    }
+  }
 }

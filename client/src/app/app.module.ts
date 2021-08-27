@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AboutComponent } from './componenets/about/about.component';
 import { HeaderComponent } from './componenets/header/header.component';
@@ -24,6 +25,7 @@ import { StatisticsComponent } from './componenets/statistics/statistics.compone
 import { RegisterComponent } from './componenets/register/register.component';
 import { StoreComponent } from './componenets/store/store.component';
 import { SearchComponent } from './componenets/search/search.component';
+import { CartComponent } from './componenets/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { SearchComponent } from './componenets/search/search.component';
     RegisterComponent,
     StoreComponent,
     SearchComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { SearchComponent } from './componenets/search/search.component';
     MatStepperModule,
     MatSelectModule,
     MatSidenavModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

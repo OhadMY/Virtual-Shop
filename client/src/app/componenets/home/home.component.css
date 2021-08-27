@@ -1,3 +1,5 @@
 .my-grid-list {
   padding-top: 12px !important;
+  display: flex;
+  flex-direction: column;
 }

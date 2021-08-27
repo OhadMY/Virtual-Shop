@@ -7,7 +7,7 @@ import ProductsModel from '../models/users.model';
   providedIn: 'root',
 })
 export class DataService {
-  public connectedUser;
+  public connectedUser: UsersModel | null;
   public isAdmin: boolean = null;
   public isConnected: boolean = false;
 
@@ -31,7 +31,6 @@ export class DataService {
         else this.isAdmin = true;
         this.isConnected = true;
         window.location.href = 'http://localhost:4200/home';
-        console.log(this.connectedUser);
       } else {
         alert('Wrong Credentials');
       }

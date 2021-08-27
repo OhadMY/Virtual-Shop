@@ -8,12 +8,22 @@
   align-items: center;
 }
 
-/* .centered-div {
-  height: 190px;
-  margin: 10px;
-  padding: 5px;
-} */
-
 mat-form-field {
-  width: 450px;
+  width: 100%;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.m {
+  margin-top: 1%;
+}
+
+mat-hint {
+  color: red;
 }

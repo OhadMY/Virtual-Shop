@@ -9,12 +9,6 @@ span {
   cursor: pointer;
 }
 
-.contact-us {
-  text-decoration: none;
-  color: white;
-  font-size: large;
-}
-
 .example-spacer {
   flex: 1 1 auto;
 }

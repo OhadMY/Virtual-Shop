@@ -1,8 +1,8 @@
 <app-search></app-search>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
-    <!-- <app-product-form *appRole="'admin'"></app-product-form>
-    <app-cart *appRole="'user'"></app-cart> -->
+    <!-- <app-product-form *ngIf="isAdminConnected"></app-product-form> -->
+    <app-cart *ngIf="isUserConnected"></app-cart>
   </mat-drawer>
 
   <div class="container mt-5">
