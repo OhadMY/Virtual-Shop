@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import ProductsModel from 'src/app/models/products.model';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,7 @@ export class CartComponent implements OnInit {
     'remove',
   ];
   public panelOpenState = false;
-  public cartItems: Array<any> = [];
+  public cartItems: Array<ProductsModel> = [];
 
   constructor() {}
 

@@ -42,3 +42,8 @@ img {
   grid-column: 1 / 5;
   color: #8bc34a;
 }
+
+.result-message {
+  display: flex;
+  justify-content: center;
+}

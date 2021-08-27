@@ -21,30 +21,27 @@
           <mat-card-content>{{ product.name }}</mat-card-content>
           <mat-card-content>${{ product.price }}</mat-card-content> -->
           <mat-card-actions>
-            <button
-              *appRole="'user'"
+            <!-- <button
+              *ngIf="isUserConnected"
               type="button"
               mat-raised-button
               color="accent"
+              (click)="addProductToCart(product)"
             >
-              <!-- (click)="addProductToCart(product)" -->
               Add
-            </button>
-            <button
-              *appRole="'admin'"
+            </button> -->
+            <!-- <button
+              *ngIf="isAdminConnected"
               type="button"
               mat-raised-button
               color="accent"
+              (click)="editProduct(product)"
             >
-              <!-- (click)="editProduct(product)" -->
               Edit
-            </button>
+            </button> -->
           </mat-card-actions>
         </mat-card>
-        <h3 class="result-message" fxLayoutAlign="center center">
-          <!-- *ngIf="result.length === 0 && !isLoading" -->
-          Sorry! No products found...☹️
-        </h3>
+        <!-- <h3 class="result-message" *ngIf="result.length === 0 && !isLoading" fxLayoutAlign="center center">Sorry! No products found...☹️</h3>     -->
       </ng-container>
     </div>
   </div>

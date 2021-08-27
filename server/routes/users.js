@@ -52,6 +52,7 @@ router.post("/login", async (req, res) => {
       }
     );
     // send token
+    console.log(token);
     res.cookie("token", token);
     res.send({ token, user });
   } catch (error) {
@@ -59,7 +60,21 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Fix register - email validation
+// Start token backup
+// const token = jwt.sign(
+//   {
+//     user,
+//   },
+//   process.env.JWT_SECRET,
+//   {
+//     expiresIn: "7d",
+//   }
+// );
+// // send token
+// res.cookie("token", token);
+// res.send({ token, user });
+// End
+
 router.post("/register", async (req, res) => {
   try {
     // make sure all info exists

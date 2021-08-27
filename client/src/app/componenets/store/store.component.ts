@@ -40,6 +40,7 @@ export class StoreComponent implements OnInit {
         this.openCartTotalPrice = await this._data.getTotalPrice(
           this.openCart.shoppingCartId
         );
+        await this._data.getAllProds();
       }
     } catch (error) {
       this.isAuthenticated = false;

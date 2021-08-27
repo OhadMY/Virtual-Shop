@@ -116,4 +116,18 @@ router.put("/removeoneprod/:prodInCart", verifyUser, async (req, res) => {
   }
 });
 
+router.get("/allcartprods/:cartId", async (req, res) => {
+  const { cartId } = req.params;
+  try {
+    const allCartProds = await myQuery(
+      `SELECT prodInCart.cartId,prodInCart.prodInCartId,prodInCart.prodCartId,prodInCart.quantity,products.prodPrice, SUM(prodInCart.quantity * products.prodPrice) AS Total 
+      FROM prodInCart JOIN products ON prodInCart.prodCartId = products.prodId WHERE cartId=${cartId} GROUP BY prodInCart.prodInCartId;`
+    );
+    console.log(allCartProds);
+    res.status(200).send(allCartProds);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 module.exports = router;

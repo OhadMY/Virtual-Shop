@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
       let jwtData = jwt.split('.')[1];
       let decodedJwtJsonData = window.atob(jwtData);
       let decodedJwtData = JSON.parse(decodedJwtJsonData);
-      // console.log(jwtData);
-      // console.log(decodedJwtData);
+      console.log(jwtData);
+      console.log(decodedJwtData);
       this.userName = decodedJwtData.user.firstName;
       this.isAuthenticated = true;
       if (decodedJwtData.user.userType === 0) this.isUserConnected = true;
