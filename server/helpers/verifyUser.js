@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 
 function verifyUser(req, res, next) {
   try {
-    const token = req.headers.cookie.split("=")[1];
+    const token = req.headers["authorization"];
+    // const token = req.headers.cookie.split("=")[1];
     jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
       if (err) {
         return res.status(401).send(err);

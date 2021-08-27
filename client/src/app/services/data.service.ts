@@ -19,6 +19,7 @@ export class DataService {
       const res = await fetch('http://localhost:1000/users/login', {
         method: 'POST',
         headers: {
+          authorization: localStorage.token,
           'content-type': 'application/json',
         },
         body: JSON.stringify({ eMail, userPassword }),
@@ -53,7 +54,7 @@ export class DataService {
       const res = await fetch('http://localhost:1000/users/register', {
         method: 'POST',
         headers: {
-          //   authorization: localStorage.token,
+          authorization: localStorage.token,
           'content-type': 'application/json',
         },
         body: JSON.stringify({
@@ -83,6 +84,7 @@ export class DataService {
       await fetch('http://localhost:1000/users/logout', {
         method: 'POST',
         headers: {
+          authorization: localStorage.token,
           'content-type': 'application/json',
         },
       });
@@ -149,10 +151,14 @@ export class DataService {
 
   public async getAllProds() {
     try {
-      const res = await fetch('http://localhost:1000/products');
-      console.log(res);
-      const data = res.json();
-      console.log(data);
+      const res = await fetch('http://localhost:1000/products', {
+        headers: {
+          authorization: localStorage.token,
+          'content-type': 'application/json',
+        },
+      });
+      const data = await res.json();
+      return data;
     } catch (error) {
       console.log(error);
     }

@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
       return res.status(401).send({ Error: "Invalid Credentials" });
     }
     delete user.userPassword;
-    // generate token and send it back to the user
+    // generate token
     const token = jwt.sign(
       {
         user,
@@ -52,28 +52,11 @@ router.post("/login", async (req, res) => {
       }
     );
     // send token
-    console.log(token);
-    res.cookie("token", token);
     res.send({ token, user });
   } catch (error) {
     res.status(500).send(error);
   }
 });
-
-// Start token backup
-// const token = jwt.sign(
-//   {
-//     user,
-//   },
-//   process.env.JWT_SECRET,
-//   {
-//     expiresIn: "7d",
-//   }
-// );
-// // send token
-// res.cookie("token", token);
-// res.send({ token, user });
-// End
 
 router.post("/register", async (req, res) => {
   try {
