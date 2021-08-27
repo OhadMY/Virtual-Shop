@@ -23,18 +23,6 @@ router.get("/totalproducts", async (req, res) => {
   }
 });
 
-router.get("/:prodCategoryId", verifyUser, async (req, res) => {
-  try {
-    const { prodCategoryId } = req.params;
-    const products = await myQuery(
-      `SELECT * FROM products WHERE categoryId=${prodCategoryId}`
-    );
-    res.status(200).send(products);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
 router.post("/newproduct", verifyUser, verifyAdmin, async (req, res) => {
   try {
     const { categoryId, prodName, prodPrice, prodImage } = req.body;
@@ -70,5 +58,27 @@ router.put(
     }
   }
 );
+
+router.get("/prodcategory/:prodCategoryId", verifyUser, async (req, res) => {
+  try {
+    const { prodCategoryId } = req.params;
+    const products = await myQuery(
+      `SELECT * FROM products WHERE categoryId=${prodCategoryId}`
+    );
+    res.status(200).send(products);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.get("/prodcategories", async (req, res) => {
+  try {
+    const categories = await myQuery("SELECT * FROM prodCategory");
+    console.log(categories);
+    res.status(200).send(categories);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 module.exports = router;

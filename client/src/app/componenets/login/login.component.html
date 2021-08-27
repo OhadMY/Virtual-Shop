@@ -89,6 +89,13 @@
     class="image"
     mat-card-image
     *ngIf="isUserConnected && openCart"
-    src="https://cdn.pixabay.com/photo/2020/02/26/07/41/grocery-basket-4880912_1280.png"
+    src="http://localhost:1000/images/ShoppingCart.png"
+  />
+  <img
+    routerLink="/store"
+    class="image"
+    mat-card-image
+    *ngIf="isAdminConnected"
+    src="http://localhost:1000/images/Edit.jpg"
   />
 </mat-card>

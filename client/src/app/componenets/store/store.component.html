@@ -6,10 +6,19 @@
   </mat-drawer>
 
   <div class="container mt-5">
-    <!-- <app-navbar-categories
-      class="m-5"
-      (productsByCategory)="getProductsByCategory($event)"
-    ></app-navbar-categories> -->
+    <div class="buttons">
+      <mat-button-toggle-group
+        fxLayoutAlign="space-evenly"
+        fxLayout.lt-sm="column"
+      >
+        <mat-button-toggle
+          *ngFor="let category of categories"
+          (click)="_data.getProdCategoryById(category.prodCategoryId)"
+        >
+          {{ category.categoryName }}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
 
     <div class="main">
       <!-- <ng-container *ngIf="products | search: searchText as result"> -->

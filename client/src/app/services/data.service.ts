@@ -157,8 +157,41 @@ export class DataService {
           'content-type': 'application/json',
         },
       });
-      const data = await res.json();
-      return data;
+      const products = await res.json();
+      return products;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getProdCategories() {
+    try {
+      const res = await fetch('http://localhost:1000/products/prodcategories', {
+        headers: {
+          authorization: localStorage.token,
+          'content-type': 'application/json',
+        },
+      });
+      const categories = await res.json();
+      return categories;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getProdCategoryById(prodCategoryId: number) {
+    try {
+      const res = await fetch(
+        `http://localhost:1000/products/prodcategory/${prodCategoryId}`,
+        {
+          headers: {
+            authorization: localStorage.token,
+            'content-type': 'application/json',
+          },
+        }
+      );
+      const category = await res.json();
+      return category;
     } catch (error) {
       console.log(error);
     }

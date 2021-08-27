@@ -80,18 +80,20 @@ PRIMARY KEY (prodInCartId)
 );
 
 INSERT INTO ProdInCart (cartId,quantity,prodCartId) VALUES (1,4,3);
-select * from ProdInCart;
-SELECT prodInCart.cartId,prodInCart.prodInCartId,prodInCart.quantity,products.prodPrice, SUM(prodInCart.quantity * products.prodPrice) AS Total 
+UPDATE ProdInCart SET quantity=quantity-1 WHERE prodInCartId = 1;
+SELECT prodInCart.cartId,prodInCart.prodInCartId,prodInCart.prodCartId,prodInCart.quantity,products.prodPrice, SUM(prodInCart.quantity * products.prodPrice) AS Total 
 FROM prodInCart JOIN
      products ON 
      prodInCart.prodCartId = products.prodId
+     WHERE cartId=1
      -- groupby prodInCartId sums up each product in every cart
      -- groupby cartId sums up all products in each cart
 GROUP BY prodInCart.prodInCartId;
 DELETE FROM prodInCart WHERE prodInCartId = 1;
-UPDATE ProdInCart SET quantity=quantity-1 WHERE prodInCartId = 1;
+select * from ProdInCart;
 SELECT * FROM shoppingCarts;
 SELECT * FROM products;
+SELECT * FROM prodCategory;
 
 CREATE TABLE orders (
 orderId INT AUTO_INCREMENT,

@@ -18,8 +18,8 @@ export class StoreComponent implements OnInit {
   public isUserConnected: boolean = false;
   public openCart: any = null;
   public openCartTotalPrice: number = null;
-
   public products: Array<ProductsModel> = [];
+  public categories: Array<any> = [];
 
   async ngOnInit(): Promise<void> {
     try {
@@ -41,7 +41,7 @@ export class StoreComponent implements OnInit {
           this.openCart.shoppingCartId
         );
         this.products = await this._data.getAllProds();
-        console.log(this.products);
+        this.categories = await this._data.getProdCategories();
       }
     } catch (error) {
       this.isAuthenticated = false;
