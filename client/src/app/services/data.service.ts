@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import UsersModel from '../models/users.model';
+import ProductsModel from '../models/users.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  public connectedUser: UsersModel;
-  public isAdmin = null;
+  public connectedUser;
+  public isAdmin: boolean = null;
   public isConnected: boolean = false;
 
   constructor(public _r: Router) {}
@@ -30,6 +31,7 @@ export class DataService {
         else this.isAdmin = true;
         this.isConnected = true;
         window.location.href = 'http://localhost:4200/home';
+        console.log(this.connectedUser);
       } else {
         alert('Wrong Credentials');
       }
@@ -141,6 +143,17 @@ export class DataService {
       const res = await fetch('http://localhost:1000/products/totalproducts');
       const prod = await res.json();
       return prod;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getAllProds() {
+    try {
+      const res = await fetch('http://localhost:1000/products');
+      console.log(res);
+      const data = res.json();
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

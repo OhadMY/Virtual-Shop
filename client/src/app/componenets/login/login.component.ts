@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   public isAdminConnected: boolean = false;
   public isUserConnected: boolean = false;
   public userName: string = null;
-  public openCart = null;
-  public openCartTotalPrice = null;
+  public openCart: any = null;
+  public openCartTotalPrice: number = null;
   public welcomeMessage: string = null;
 
   constructor(public _fb: FormBuilder, public _data: DataService) {}

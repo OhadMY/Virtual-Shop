@@ -1,1 +1,51 @@
-<p>store works!</p>
+<app-search></app-search>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
+    <!-- <app-product-form *appRole="'admin'"></app-product-form>
+    <app-cart *appRole="'user'"></app-cart> -->
+  </mat-drawer>
+
+  <div class="container mt-5">
+    <!-- <app-navbar-categories
+      class="m-5"
+      (productsByCategory)="getProductsByCategory($event)"
+    ></app-navbar-categories> -->
+
+    <div class="main">
+      <!-- <div class="main" [@cardAnimation]="products.length"> -->
+      <ng-container>
+        <!-- <ng-container *ngIf="products | search: searchText as result"> -->
+        <mat-card>
+          <!-- <mat-card *ngFor="let product of result" class="my-card h-100"> -->
+          <!-- <img mat-card-image [src]="product.image" alt="image" />
+          <mat-card-content>{{ product.name }}</mat-card-content>
+          <mat-card-content>${{ product.price }}</mat-card-content> -->
+          <mat-card-actions>
+            <button
+              *appRole="'user'"
+              type="button"
+              mat-raised-button
+              color="accent"
+            >
+              <!-- (click)="addProductToCart(product)" -->
+              Add
+            </button>
+            <button
+              *appRole="'admin'"
+              type="button"
+              mat-raised-button
+              color="accent"
+            >
+              <!-- (click)="editProduct(product)" -->
+              Edit
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <h3 class="result-message" fxLayoutAlign="center center">
+          <!-- *ngIf="result.length === 0 && !isLoading" -->
+          Sorry! No products found...☹️
+        </h3>
+      </ng-container>
+    </div>
+  </div>
+</mat-drawer-container>

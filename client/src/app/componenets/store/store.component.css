@@ -1,0 +1,44 @@
+img {
+  height: 200px;
+  width: 200px;
+  justify-self: center;
+}
+
+.example-container {
+  position: absolute;
+  top: 150px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 15px;
+}
+
+.my-card {
+  transition: transform 1s;
+  display: grid;
+}
+
+.my-card:hover {
+  transform: translateY(-10px);
+}
+
+.result-message {
+  grid-column: 1 / 5;
+  color: #8bc34a;
+}

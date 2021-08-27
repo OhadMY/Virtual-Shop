@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import ProductsModel from 'src/app/models/products.model';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -9,22 +11,39 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class StoreComponent implements OnInit {
   constructor(public _r: Router, public _data: DataService) {}
-  public isToken: boolean;
 
-  ngOnInit(): void {
+  public opened: boolean;
+  public isAuthenticated: boolean = false;
+  public isAdminConnected: boolean = false;
+  public isUserConnected: boolean = false;
+  public openCart: any = null;
+  public openCartTotalPrice: number = null;
+
+  public result: Array<ProductsModel> = [];
+
+  async ngOnInit(): Promise<void> {
     try {
       const jwt = localStorage.getItem('token');
       let jwtData = jwt.split('.')[1];
       let decodedJwtJsonData = window.atob(jwtData);
-      // let decodedJwtData = JSON.parse(decodedJwtJsonData);
-      // console.log(jwtData);
-      // console.log(decodedJwtJsonData);
-      // console.log(decodedJwtData);
-      this.isToken = true;
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      this.isAuthenticated = true;
+      if (decodedJwtData.user.userType === 0) this.isUserConnected = true;
+      else this.isAdminConnected = true;
+      if (this.isAuthenticated) {
+        this.openCart = await this._data.getUserCart(
+          decodedJwtData.user.userId
+        );
+        this.openCart.cartCreationTime = moment(
+          this.openCart.cartCreationTime
+        ).format('DD-MM-YYYY');
+        this.openCartTotalPrice = await this._data.getTotalPrice(
+          this.openCart.shoppingCartId
+        );
+      }
     } catch (error) {
-      this.isToken = false;
+      this.isAuthenticated = false;
     }
-    console.log(this.isToken);
-    if (!this.isToken) this._r.navigate(['/home']);
+    if (!this.isAuthenticated) this._r.navigate(['/home']);
   }
 }
