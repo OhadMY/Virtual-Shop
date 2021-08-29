@@ -138,6 +138,20 @@ export class DataService {
     }
   }
 
+  public async emptyCart(cartId: number) {
+    try {
+      await fetch(`http://localhost:1000/shoppingcarts/emptycart/${cartId}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: localStorage.token,
+          'content-type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // Products Routes
   public async getTotalProds() {
     try {
@@ -193,20 +207,6 @@ export class DataService {
       const category = await res.json();
       console.log(category);
       return category;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  public async emptyCart(cartId: number) {
-    try {
-      await fetch(`http://localhost:1000/shoppingcarts/emptycart/${cartId}`, {
-        method: 'DELETE',
-        headers: {
-          authorization: localStorage.token,
-          'content-type': 'application/json',
-        },
-      });
     } catch (error) {
       console.log(error);
     }

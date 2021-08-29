@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   public userName: string = null;
   public openCart: any = null;
   public openCartTotalPrice: number = null;
-  public welcomeMessage: string = null;
 
   constructor(public _fb: FormBuilder, public _data: DataService) {}
 
