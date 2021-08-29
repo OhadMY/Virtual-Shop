@@ -4,3 +4,7 @@
   margin: auto;
   padding-bottom: 15px;
 }
+
+.card {
+  max-width: 320px;
+}

@@ -59,6 +59,7 @@ router.put(
   }
 );
 
+// Might not be needed
 router.get("/prodcategory/:prodCategoryId", verifyUser, async (req, res) => {
   try {
     const { prodCategoryId } = req.params;
@@ -70,6 +71,7 @@ router.get("/prodcategory/:prodCategoryId", verifyUser, async (req, res) => {
     res.status(500).send(error);
   }
 });
+// Might not be needed
 
 router.get("/prodcategories", async (req, res) => {
   try {
