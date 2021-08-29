@@ -191,6 +191,7 @@ export class DataService {
         }
       );
       const category = await res.json();
+      console.log(category);
       return category;
     } catch (error) {
       console.log(error);

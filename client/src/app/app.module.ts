@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AboutComponent } from './componenets/about/about.component';
 import { HeaderComponent } from './componenets/header/header.component';
@@ -58,6 +59,7 @@ import { CartComponent } from './componenets/cart/cart.component';
     MatSidenavModule,
     MatIconModule,
     MatButtonToggleModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

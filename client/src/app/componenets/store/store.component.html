@@ -1,4 +1,5 @@
 <app-search></app-search>
+
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
     <!-- <app-product-form *ngIf="isAdminConnected"></app-product-form> -->
@@ -7,51 +8,85 @@
 
   <div class="container mt-5">
     <div class="buttons">
-      <mat-button-toggle-group
-        fxLayoutAlign="space-evenly"
-        fxLayout.lt-sm="column"
-      >
-        <mat-button-toggle
+      <mat-tab-group>
+        <mat-tab label="General"
+          ><div class="main">
+            <!-- <ng-container *ngIf="products | search: searchText as result"> -->
+            <ng-container>
+              <mat-card *ngFor="let product of products" class="my-card h-100">
+                <img mat-card-image [src]="product.prodImage" alt="image" />
+                <mat-card-content>{{ product.prodName }}</mat-card-content>
+                <mat-card-content>${{ product.prodPrice }}</mat-card-content>
+                <mat-card-actions>
+                  <button
+                    *ngIf="isUserConnected"
+                    type="button"
+                    mat-raised-button
+                    color="accent"
+                  >
+                    <!-- (click)="addProductToCart(product)" -->
+                    Add
+                  </button>
+                  <button
+                    *ngIf="isAdminConnected"
+                    type="button"
+                    mat-raised-button
+                    color="accent"
+                  >
+                    <!-- (click)="editProduct(product)" -->
+                    Edit
+                  </button>
+                </mat-card-actions>
+              </mat-card>
+              <h3 class="result-message" *ngIf="products.length === 0">
+                Sorry! No products found...☹️
+              </h3>
+            </ng-container>
+          </div></mat-tab
+        >
+        <mat-tab
           *ngFor="let category of categories"
           (click)="_data.getProdCategoryById(category.prodCategoryId)"
+          label="{{ category.categoryName }}"
         >
-          {{ category.categoryName }}
-        </mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
-
-    <div class="main">
-      <!-- <ng-container *ngIf="products | search: searchText as result"> -->
-      <ng-container>
-        <mat-card *ngFor="let product of products" class="my-card h-100">
-          <img mat-card-image [src]="product.prodImage" alt="image" />
-          <mat-card-content>{{ product.prodName }}</mat-card-content>
-          <mat-card-content>${{ product.prodPrice }}</mat-card-content>
-          <mat-card-actions>
-            <button
-              *ngIf="isUserConnected"
-              type="button"
-              mat-raised-button
-              color="accent"
-            >
-              <!-- (click)="addProductToCart(product)" -->
-              Add
-            </button>
-            <button
-              *ngIf="isAdminConnected"
-              type="button"
-              mat-raised-button
-              color="accent"
-            >
-              <!-- (click)="editProduct(product)" -->
-              Edit
-            </button>
-          </mat-card-actions>
-        </mat-card>
-        <h3 class="result-message" *ngIf="products.length === 0">
-          Sorry! No products found...☹️
-        </h3>
-      </ng-container>
+          <div class="main">
+            <!-- <ng-container *ngIf="products | search: searchText as result"> -->
+            <ng-container *ngFor="let product of products">
+              <mat-card
+                *ngIf="category.prodCategoryId === product.categoryId"
+                class="my-card h-100"
+              >
+                <img mat-card-image [src]="product.prodImage" alt="image" />
+                <mat-card-content>{{ product.prodName }}</mat-card-content>
+                <mat-card-content>${{ product.prodPrice }}</mat-card-content>
+                <mat-card-actions>
+                  <button
+                    *ngIf="isUserConnected"
+                    type="button"
+                    mat-raised-button
+                    color="accent"
+                  >
+                    <!-- (click)="addProductToCart(product)" -->
+                    Add
+                  </button>
+                  <button
+                    *ngIf="isAdminConnected"
+                    type="button"
+                    mat-raised-button
+                    color="accent"
+                  >
+                    <!-- (click)="editProduct(product)" -->
+                    Edit
+                  </button>
+                </mat-card-actions>
+              </mat-card>
+              <h3 class="result-message" *ngIf="products.length === 0">
+                Sorry! No products found...☹️
+              </h3>
+            </ng-container>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </mat-drawer-container>
