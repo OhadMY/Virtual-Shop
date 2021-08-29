@@ -130,4 +130,16 @@ router.get("/allcartprods/:cartId", async (req, res) => {
   }
 });
 
+router.delete("/emptycart/:cartId", async (req, res) => {
+  try {
+    const { cartId } = req.params;
+    const deleted = await myQuery(
+      `DELETE FROM ProdInCart WHERE cartId=${cartId}`
+    );
+    res.status(200).send(deleted);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 module.exports = router;

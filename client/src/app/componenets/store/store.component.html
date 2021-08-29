@@ -16,7 +16,10 @@
     <app-cart *ngIf="isUserConnected"></app-cart>
   </mat-drawer>
 
-  <div class="container mt-5">
+  <div class="container">
+    <button mat-button (click)="HandleSideBar()" matTooltip="Open/Close Cart">
+      <mat-icon class="material-icons-outlined cart"> shopping_cart </mat-icon>
+    </button>
     <div class="buttons">
       <mat-tab-group>
         <mat-tab label="General"

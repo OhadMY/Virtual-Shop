@@ -20,7 +20,6 @@ export class StoreComponent implements OnInit {
   public openCartTotalPrice: number = null;
   public products: Array<ProductsModel> = [];
   public categories: Array<any> = [];
-
   public filteredString: string;
 
   async ngOnInit(): Promise<void> {
@@ -49,5 +48,9 @@ export class StoreComponent implements OnInit {
       this.isAuthenticated = false;
     }
     if (!this.isAuthenticated) this._r.navigate(['/home']);
+  }
+
+  HandleSideBar() {
+    this.opened = !this.opened;
   }
 }

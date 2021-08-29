@@ -197,4 +197,18 @@ export class DataService {
       console.log(error);
     }
   }
+
+  public async emptyCart(cartId: number) {
+    try {
+      await fetch(`http://localhost:1000/shoppingcarts/emptycart/${cartId}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: localStorage.token,
+          'content-type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

@@ -19,6 +19,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+// import { MatTableModule } from '@angular/material/table';
 
 import { AboutComponent } from './componenets/about/about.component';
 import { HeaderComponent } from './componenets/header/header.component';
@@ -27,7 +30,6 @@ import { LoginComponent } from './componenets/login/login.component';
 import { StatisticsComponent } from './componenets/statistics/statistics.component';
 import { RegisterComponent } from './componenets/register/register.component';
 import { StoreComponent } from './componenets/store/store.component';
-import { SearchComponent } from './componenets/search/search.component';
 import { CartComponent } from './componenets/cart/cart.component';
 
 @NgModule({
@@ -40,7 +42,6 @@ import { CartComponent } from './componenets/cart/cart.component';
     StatisticsComponent,
     RegisterComponent,
     StoreComponent,
-    SearchComponent,
     CartComponent,
   ],
   imports: [
@@ -62,6 +63,8 @@ import { CartComponent } from './componenets/cart/cart.component';
     MatButtonToggleModule,
     MatTabsModule,
     Ng2SearchPipeModule,
+    MatTooltipModule,
+    // MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
