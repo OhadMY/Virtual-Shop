@@ -21,6 +21,8 @@ export class StoreComponent implements OnInit {
   public products: Array<ProductsModel> = [];
   public categories: Array<any> = [];
 
+  public filteredString: string;
+
   async ngOnInit(): Promise<void> {
     try {
       const jwt = localStorage.getItem('token');

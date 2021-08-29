@@ -1,5 +1,15 @@
-<app-search></app-search>
-
+<form>
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      placeholder="What can we help you find today?"
+      type="text"
+      [(ngModel)]="filteredString"
+      name="filteredString"
+    />
+    <mat-icon matSuffix><mat-icon matSuffix>search</mat-icon></mat-icon>
+  </mat-form-field>
+</form>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
     <!-- <app-product-form *ngIf="isAdminConnected"></app-product-form> -->
@@ -11,9 +21,11 @@
       <mat-tab-group>
         <mat-tab label="General"
           ><div class="main">
-            <!-- <ng-container *ngIf="products | search: searchText as result"> -->
             <ng-container>
-              <mat-card *ngFor="let product of products" class="my-card h-100">
+              <mat-card
+                *ngFor="let product of products | filter: filteredString"
+                class="my-card h-100"
+              >
                 <img mat-card-image [src]="product.prodImage" alt="image" />
                 <mat-card-content>{{ product.prodName }}</mat-card-content>
                 <mat-card-content>${{ product.prodPrice }}</mat-card-content>
@@ -50,7 +62,6 @@
           label="{{ category.categoryName }}"
         >
           <div class="main">
-            <!-- <ng-container *ngIf="products | search: searchText as result"> -->
             <ng-container *ngFor="let product of products">
               <mat-card
                 *ngIf="category.prodCategoryId === product.categoryId"
