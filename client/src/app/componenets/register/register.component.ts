@@ -16,13 +16,16 @@ export class RegisterComponent implements OnInit {
   public registerForm2: FormGroup;
   public requiredMsg: string = 'Field is required.';
   public cities: Array<string> = [
-    'London',
-    'Birmingham',
-    'Leicester',
-    'Southampton',
-    'Leeds',
-    'Manchester',
-    'Liverpool',
+    'Jerusalem',
+    'Tel Aviv',
+    'Haifa',
+    'Rishon LeZion',
+    'Petah Tikva',
+    'Ashdod',
+    'Netanya',
+    'Beer Sheva',
+    'Nahariya',
+    'Holon',
   ];
   public hintColor: string = '#ff0000';
 

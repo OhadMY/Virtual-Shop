@@ -73,7 +73,7 @@ router.get("/prodcategory/:prodCategoryId", verifyUser, async (req, res) => {
 });
 // Might not be needed
 
-router.get("/prodcategories", async (req, res) => {
+router.get("/prodcategories", verifyUser, async (req, res) => {
   try {
     const categories = await myQuery("SELECT * FROM prodCategory");
     console.log(categories);

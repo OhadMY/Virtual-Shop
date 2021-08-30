@@ -21,7 +21,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-// import { MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { CdkTableModule } from '@angular/cdk/table';
 
 import { AboutComponent } from './componenets/about/about.component';
 import { HeaderComponent } from './componenets/header/header.component';
@@ -64,7 +65,8 @@ import { CartComponent } from './componenets/cart/cart.component';
     MatTabsModule,
     Ng2SearchPipeModule,
     MatTooltipModule,
-    // MatTableModule,
+    MatTableModule,
+    CdkTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import UsersModel from '../models/users.model';
-import ProductsModel from '../models/users.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  public connectedUser: UsersModel | null;
-  public isAdmin: boolean = null;
-  public isConnected: boolean = false;
-
   constructor(public _r: Router) {}
 
   // User Routes
@@ -27,10 +21,6 @@ export class DataService {
       const data = await res.json();
       if (res.status == 200) {
         localStorage.token = data.token;
-        this.connectedUser = data.user;
-        if (this.connectedUser.userType === 1) this.isAdmin = false;
-        else this.isAdmin = true;
-        this.isConnected = true;
         window.location.href = 'http://localhost:4200/home';
       } else {
         alert('Wrong Credentials');
@@ -89,7 +79,6 @@ export class DataService {
         },
       });
       localStorage.clear();
-      this.isConnected = false;
       window.location.href = 'http://localhost:4200/home';
     } catch (error) {
       console.log(error);
@@ -137,6 +126,26 @@ export class DataService {
       console.log(error);
     }
   }
+
+  // New
+  public async GetAllCartProducts(cartId: number) {
+    try {
+      const res = await fetch(
+        `http://localhost:1000/shoppingcarts/allcartprods/${cartId}`,
+        {
+          headers: {
+            authorization: localStorage.token,
+            'content-type': 'application/json',
+          },
+        }
+      );
+      const productslist = await res.json();
+      return productslist;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // New
 
   public async emptyCart(cartId: number) {
     try {

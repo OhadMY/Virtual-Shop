@@ -116,11 +116,11 @@ router.put("/removeoneprod/:prodInCart", verifyUser, async (req, res) => {
   }
 });
 
-router.get("/allcartprods/:cartId", async (req, res) => {
+router.get("/allcartprods/:cartId", verifyUser, async (req, res) => {
   const { cartId } = req.params;
   try {
     const allCartProds = await myQuery(
-      `SELECT prodInCart.cartId,prodInCart.prodInCartId,prodInCart.prodCartId,prodInCart.quantity,products.prodPrice, SUM(prodInCart.quantity * products.prodPrice) AS Total 
+      `SELECT prodInCart.cartId,prodInCart.prodInCartId,products.prodId,products.prodImage,products.prodName,prodInCart.quantity,products.prodPrice, SUM(prodInCart.quantity * products.prodPrice) AS Total 
       FROM prodInCart JOIN products ON prodInCart.prodCartId = products.prodId WHERE cartId=${cartId} GROUP BY prodInCart.prodInCartId;`
     );
     console.log(allCartProds);
@@ -130,7 +130,7 @@ router.get("/allcartprods/:cartId", async (req, res) => {
   }
 });
 
-router.delete("/emptycart/:cartId", async (req, res) => {
+router.delete("/emptycart/:cartId", verifyUser, async (req, res) => {
   try {
     const { cartId } = req.params;
     const deleted = await myQuery(
