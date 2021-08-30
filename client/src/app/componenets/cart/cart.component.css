@@ -1,5 +1,5 @@
 table {
-  width: 400px;
+  width: 420px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -11,9 +11,8 @@ table {
 tr.mat-footer-row {
   font-weight: bold;
 }
-
-img {
-  width: 40px;
+th.mat-header-cell {
+  font-weight: bold;
 }
 
 .btn-remove {
@@ -41,4 +40,19 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.prodImage {
+  height: 75px;
+  width: 75px;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  padding: 2px 0 2px 0 !important;
+}
+
+img {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
 }

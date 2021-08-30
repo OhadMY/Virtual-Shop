@@ -3,6 +3,17 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { StoreComponent } from '../store/store.component';
 
+export interface CartItems {
+  Total: number;
+  cartId: number;
+  prodId: number;
+  prodInCartId: number;
+  prodImage: string;
+  prodName: string;
+  prodPrice: number;
+  quantity: number;
+}
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -11,16 +22,16 @@ import { StoreComponent } from '../store/store.component';
 export class CartComponent implements OnInit {
   public isAuthenticated: boolean = false;
   public openCart: any = null;
-  public cartItems: any = null;
+  public cartItems: CartItems[] = [];
   public displayedColumns: string[] = [
     'image',
-    'item',
+    'product',
     'quantity',
     'price',
     'total',
-    'remove',
+    'edit',
   ];
-  public distest: string[] = ['image'];
+  public openCartTotalPrice: number = null;
 
   constructor(
     public _r: Router,
@@ -34,11 +45,11 @@ export class CartComponent implements OnInit {
     let decodedJwtJsonData = window.atob(jwtData);
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
     this.openCart = await this._data.getUserCart(decodedJwtData.user.userId);
-    let temp = await this._data.GetAllCartProducts(
+    this.cartItems = await this._data.GetAllCartProducts(
       this.openCart.shoppingCartId
     );
-    this.cartItems = JSON.stringify(temp);
-    console.log(temp);
-    console.log(this.cartItems);
+    this.openCartTotalPrice = await this._data.getTotalPrice(
+      this.openCart.shoppingCartId
+    );
   }
 }
