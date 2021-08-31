@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import CartItems from '../models/cartitems.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   constructor(public _r: Router) {}
+
+  public cartItems: CartItems[] = [];
+  public totalPrice: number = 0;
 
   // User Routes
   public async login(eMail: string, userPassword: string) {
@@ -120,6 +124,8 @@ export class DataService {
       if (data.length === 0) return 0;
       else {
         const total = data[0].Total;
+        console.log(total);
+        this.totalPrice = total;
         return total;
       }
     } catch (error) {
@@ -140,6 +146,7 @@ export class DataService {
         }
       );
       const productslist = await res.json();
+      this.cartItems = productslist;
       return productslist;
     } catch (error) {
       console.log(error);
@@ -156,7 +163,8 @@ export class DataService {
           'content-type': 'application/json',
         },
       });
-      window.location.reload();
+      this.cartItems = [];
+      this.totalPrice = 0;
     } catch (error) {
       console.log(error);
     }
@@ -220,5 +228,9 @@ export class DataService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  public getCartSum(): number {
+    return this.totalPrice;
   }
 }
