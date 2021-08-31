@@ -1,18 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import CartItems from 'src/app/models/cartitems.model';
 import { DataService } from 'src/app/services/data.service';
 import { StoreComponent } from '../store/store.component';
-
-export interface CartItems {
-  Total: number;
-  cartId: number;
-  prodId: number;
-  prodInCartId: number;
-  prodImage: string;
-  prodName: string;
-  prodPrice: number;
-  quantity: number;
-}
 
 @Component({
   selector: 'app-cart',
