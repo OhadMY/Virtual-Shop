@@ -79,8 +79,6 @@ FOREIGN KEY (prodCartId) REFERENCES products(prodId),
 PRIMARY KEY (prodInCartId)
 );
 
-INSERT INTO ProdInCart (cartId,quantity,prodCartId) VALUES (5,18,3);
-UPDATE ProdInCart SET quantity=quantity-1 WHERE prodInCartId = 1;
 SELECT prodInCart.cartId,prodInCart.prodInCartId,products.prodId,products.prodImage,products.prodName,prodInCart.quantity,products.prodPrice, SUM(prodInCart.quantity * products.prodPrice) AS Total 
 FROM prodInCart JOIN
      products ON 
@@ -89,7 +87,6 @@ FROM prodInCart JOIN
      -- groupby prodInCartId sums up each product in every cart
      -- groupby cartId sums up all products in each cart
 GROUP BY prodInCart.prodInCartId;
-DELETE FROM prodInCart WHERE prodInCartId = 1;
 select * from ProdInCart;
 SELECT * FROM shoppingCarts;
 SELECT * FROM products;

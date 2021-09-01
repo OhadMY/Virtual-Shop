@@ -21,12 +21,4 @@ export class AddModalComponent implements OnInit {
     if (this.quantity === 1) return;
     this.quantity--;
   }
-
-  openDialog() {
-    this.dialog.open(AddModalComponent, {
-      data: {
-        animal: 'panda',
-      },
-    });
-  }
 }

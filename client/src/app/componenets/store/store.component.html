@@ -38,24 +38,13 @@
                     type="button"
                     mat-raised-button
                     color="accent"
-                  >
-                    Add
-                  </button>
-                  <!-- <button
-                    *ngIf="isUserConnected"
-                    type="button"
-                    mat-raised-button
-                    color="accent"
                     (click)="
-                      _data.addProdToCart(
-                        product.prodId,
-                        17,
-                        openCart.shoppingCartId
-                      )
+                      openDialog(product.prodId, openCart.shoppingCartId)
                     "
                   >
                     Add
-                  </button> -->
+                  </button>
+
                   <button
                     *ngIf="isAdminConnected"
                     type="button"
@@ -93,8 +82,10 @@
                     type="button"
                     mat-raised-button
                     color="accent"
+                    (click)="
+                      openDialog(product.prodId, openCart.shoppingCartId)
+                    "
                   >
-                    <!-- (click)="addProductToCart(product)" -->
                     Add
                   </button>
                   <button

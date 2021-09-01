@@ -1,5 +1,5 @@
 mat-form-field.mat-form-field {
-  width: 70px;
+  width: 50px;
 }
 
 mat-icon {
@@ -13,11 +13,17 @@ mat-icon {
 }
 
 mat-icon:hover {
-  color: #8bc34a;
+  color: rgb(255, 67, 99);
   opacity: 1;
 }
 
-mat-form-field {
+.dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  line-height: 0.6;
+}
+
+.actions {
+  justify-content: center;
 }

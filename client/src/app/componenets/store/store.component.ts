@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import ProductsModel from 'src/app/models/products.model';
 import { DataService } from 'src/app/services/data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddModalComponent } from '../add-modal/add-modal.component';
 
 @Component({
   selector: 'app-store',
@@ -10,7 +12,11 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./store.component.css'],
 })
 export class StoreComponent implements OnInit {
-  constructor(public _r: Router, public _data: DataService) {}
+  constructor(
+    public _r: Router,
+    public _data: DataService,
+    public dialog: MatDialog
+  ) {}
 
   public opened: boolean = true;
   public isAuthenticated: boolean = false;
@@ -52,5 +58,12 @@ export class StoreComponent implements OnInit {
 
   HandleSideBar() {
     this.opened = !this.opened;
+  }
+
+  openDialog(prodId: number, shoppingCartId: number) {
+    let dialogRef = this.dialog.open(AddModalComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) this._data.addProdToCart(prodId, result, shoppingCartId);
+    });
   }
 }
