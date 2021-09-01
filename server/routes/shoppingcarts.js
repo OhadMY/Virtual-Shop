@@ -80,6 +80,7 @@ router.post("/addproduct/:prodId", verifyUser, async (req, res) => {
 router.delete("/deleteproduct/:prodInCart", verifyUser, async (req, res) => {
   try {
     const { prodInCart } = req.params;
+    console.log(prodInCart);
     const newProd = await myQuery(
       `DELETE FROM prodInCart WHERE prodInCartId = ${prodInCart}`
     );
@@ -101,20 +102,27 @@ router.put("/addoneprod/:prodInCart", verifyUser, async (req, res) => {
   }
 });
 
+// Fix
 router.put("/removeoneprod/:prodInCart", verifyUser, async (req, res) => {
   try {
     const { prodInCart } = req.params;
-    const newProd = await myQuery(
-      `DELETE FROM prodInCart WHERE prodInCartId = ${prodInCart}`
-    );
-    // const newProd = await myQuery(
-    //   `UPDATE ProdInCart SET quantity=quantity-1 WHERE prodInCartId = ${prodInCart}`
-    // );
-    res.status(200).send(newProd);
+    const { quantity } = req.body;
+    if (quantity > 1)
+      await myQuery(
+        `UPDATE ProdInCart SET quantity=quantity-1 WHERE prodInCartId = ${prodInCart}`
+      );
+    else {
+      await myQuery(
+        `DELETE FROM prodInCart WHERE prodInCartId = ${prodInCart}`
+      );
+    }
+
+    res.status(200).send("Done");
   } catch (error) {
     res.status(500).send(error);
   }
 });
+// Fix
 
 router.get("/allcartprods/:cartId", verifyUser, async (req, res) => {
   const { cartId } = req.params;

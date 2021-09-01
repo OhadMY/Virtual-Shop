@@ -1,5 +1,5 @@
 table {
-  width: 420px;
+  width: 440px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -20,11 +20,6 @@ th.mat-header-cell {
   cursor: pointer;
   transition: 0.5s;
   opacity: 0.5;
-}
-
-.btn-remove:hover {
-  color: tomato;
-  opacity: 1;
 }
 
 .icon-close {
@@ -55,4 +50,17 @@ img {
   height: 100%;
   width: auto;
   max-width: 100%;
+}
+
+.material-icons {
+  color: gray;
+  cursor: pointer;
+}
+.material-icons:hover {
+  color: rgb(255, 67, 99);
+  cursor: pointer;
+}
+
+td {
+  text-align: center;
 }

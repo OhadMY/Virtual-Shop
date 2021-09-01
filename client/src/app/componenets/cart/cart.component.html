@@ -27,14 +27,26 @@
 
       <!-- Product Column -->
       <ng-container matColumnDef="product">
-        <th mat-header-cell *matHeaderCellDef>Product</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="text-align: center; vertical-align: middle"
+        >
+          Product
+        </th>
         <td mat-cell *matCellDef="let product">{{ product.prodName }}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
       <!-- Quantity Column -->
       <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef>Quantity</th>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="text-align: left; vertical-align: middle"
+        >
+          Quantity
+        </th>
         <td mat-cell *matCellDef="let product">{{ product.quantity }}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
@@ -55,12 +67,42 @@
 
       <!-- Edit Column -->
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef>Edit</th>
-        <td mat-cell *matCellDef="let product"></td>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          style="text-align: center; vertical-align: middle"
+        >
+          Edit
+        </th>
+        <td mat-cell *matCellDef="let product" class="actions">
+          <mat-icon
+            class="material-icons"
+            (click)="_data.addOneProdQuantity(product.prodInCartId)"
+          >
+            add_circle
+          </mat-icon>
+          <mat-icon
+            class="material-icons"
+            (click)="_data.deleteProduct(product.prodInCartId)"
+          >
+            delete
+          </mat-icon>
+          <mat-icon
+            class="material-icons"
+            (click)="
+              _data.removeOneProdQuantity(
+                product.prodInCartId,
+                product.quantity
+              )
+            "
+          >
+            remove_circle
+          </mat-icon>
+        </td>
         <td mat-footer-cell *matFooterCellDef>{{ _data.getCartSum() }}$</td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="test"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
     </table>
