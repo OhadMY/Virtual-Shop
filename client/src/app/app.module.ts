@@ -20,9 +20,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
 import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AboutComponent } from './componenets/about/about.component';
 import { HeaderComponent } from './componenets/header/header.component';
@@ -32,6 +32,8 @@ import { StatisticsComponent } from './componenets/statistics/statistics.compone
 import { RegisterComponent } from './componenets/register/register.component';
 import { StoreComponent } from './componenets/store/store.component';
 import { CartComponent } from './componenets/cart/cart.component';
+import { ProductFormComponent } from './componenets/product-form/product-form.component';
+import { AddModalComponent } from './componenets/add-modal/add-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { CartComponent } from './componenets/cart/cart.component';
     RegisterComponent,
     StoreComponent,
     CartComponent,
+    ProductFormComponent,
+    AddModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,7 @@ import { CartComponent } from './componenets/cart/cart.component';
     MatTooltipModule,
     MatTableModule,
     CdkTableModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

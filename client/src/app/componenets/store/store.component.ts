@@ -44,7 +44,6 @@ export class StoreComponent implements OnInit {
         this.products = await this._data.getAllProds();
         this.categories = await this._data.getProdCategories();
       }
-      console.log(this._data.cartItems);
     } catch (error) {
       this.isAuthenticated = false;
     }

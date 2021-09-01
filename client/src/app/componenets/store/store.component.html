@@ -12,7 +12,7 @@
 </form>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="opened">
-    <!-- <app-product-form *ngIf="isAdminConnected"></app-product-form> -->
+    <app-product-form *ngIf="isAdminConnected"></app-product-form>
     <app-cart *ngIf="isUserConnected"></app-cart>
   </mat-drawer>
 
@@ -39,9 +39,23 @@
                     mat-raised-button
                     color="accent"
                   >
-                    <!-- (click)="addProductToCart(product)" -->
                     Add
                   </button>
+                  <!-- <button
+                    *ngIf="isUserConnected"
+                    type="button"
+                    mat-raised-button
+                    color="accent"
+                    (click)="
+                      _data.addProdToCart(
+                        product.prodId,
+                        17,
+                        openCart.shoppingCartId
+                      )
+                    "
+                  >
+                    Add
+                  </button> -->
                   <button
                     *ngIf="isAdminConnected"
                     type="button"

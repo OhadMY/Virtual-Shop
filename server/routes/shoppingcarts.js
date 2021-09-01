@@ -102,7 +102,19 @@ router.put("/addoneprod/:prodInCart", verifyUser, async (req, res) => {
   }
 });
 
-// Fix
+router.put("/addquantity/:prodInCartId", verifyUser, async (req, res) => {
+  try {
+    const { prodInCartId } = req.params;
+    const { quantity } = req.body;
+    const newProd = await myQuery(
+      `UPDATE ProdInCart SET quantity=quantity+${quantity} WHERE prodInCartId = ${prodInCartId}`
+    );
+    res.status(200).send(newProd);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.put("/removeoneprod/:prodInCart", verifyUser, async (req, res) => {
   try {
     const { prodInCart } = req.params;
@@ -122,7 +134,6 @@ router.put("/removeoneprod/:prodInCart", verifyUser, async (req, res) => {
     res.status(500).send(error);
   }
 });
-// Fix
 
 router.get("/allcartprods/:cartId", verifyUser, async (req, res) => {
   const { cartId } = req.params;

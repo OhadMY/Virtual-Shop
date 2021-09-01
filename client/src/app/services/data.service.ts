@@ -171,28 +171,51 @@ export class DataService {
     }
   }
 
-  // test start
   public async addProdToCart(prodId: number, quantity: number, cartId: number) {
     try {
-      await fetch(`http://localhost:1000/shoppingcarts/addproduct/${prodId}`, {
-        method: 'POST',
-        headers: {
-          authorization: localStorage.token,
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          cartId,
-          quantity,
-        }),
-      });
-      for (let cart of this.cartItems) {
-        console.log(cart);
+      let exists = false;
+      let prodInCartId;
+      for (let cart of this.cartItems)
+        if (cart.prodId === prodId) {
+          prodInCartId = cart.prodInCartId;
+          exists = true;
+        }
+      if (!exists) {
+        await fetch(
+          `http://localhost:1000/shoppingcarts/addproduct/${prodId}`,
+          {
+            method: 'POST',
+            headers: {
+              authorization: localStorage.token,
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              cartId,
+              quantity,
+            }),
+          }
+        );
+      } else {
+        await fetch(
+          `http://localhost:1000/shoppingcarts/addquantity/${prodInCartId}`,
+          {
+            method: 'PUT',
+            headers: {
+              authorization: localStorage.token,
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              quantity,
+            }),
+          }
+        );
       }
+      await this.GetAllCartProducts(this.cartItems[0].cartId);
+      await this.getTotalPrice(this.cartItems[0].cartId);
     } catch (error) {
       console.log(error);
     }
   }
-  // test end
 
   public async addOneProdQuantity(prodInCartId: number) {
     try {

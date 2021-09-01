@@ -1,0 +1,23 @@
+mat-form-field.mat-form-field {
+  width: 70px;
+}
+
+mat-icon {
+  color: gray;
+  font-size: 1.7rem;
+  margin-right: 8px;
+  margin-left: 5px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+mat-icon:hover {
+  color: #8bc34a;
+  opacity: 1;
+}
+
+mat-form-field {
+  text-align: center;
+  line-height: 0.6;
+}
