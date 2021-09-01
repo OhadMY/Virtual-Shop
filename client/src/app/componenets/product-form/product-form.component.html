@@ -1,1 +1,114 @@
-<p>product-form works!</p>
+<div fxLayoutAlign="space-between">
+  <h1>Products Management</h1>
+  <!-- <button mat-mini-fab [matMenuTriggerFor]="menu" class="add-btn">
+    <mat-icon>more_vert</mat-icon>
+  </button> -->
+</div>
+
+<!-- <mat-menu #menu="matMenu" #beforeMenu="matMenu" xPosition="before">
+  <button mat-menu-item (click)="createMode()">
+    <span>New product</span>
+  </button>
+
+  <button mat-menu-item (click)="closeSideBar()">
+    <span>Close</span>
+  </button>
+</mat-menu> -->
+
+<form [formGroup]="productForm">
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="name"
+      type="text"
+      placeholder="Product Name"
+    />
+    <mat-error>
+      {{ requiredMsg }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="price" type="number" placeholder="Price" />
+    <mat-error>
+      {{ requiredMsg }}
+    </mat-error>
+    <mat-icon matSuffix>attach_money</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="image"
+      type="url"
+      placeholder="Image url"
+    />
+    <mat-error>
+      {{ requiredMsg }}
+    </mat-error>
+  </mat-form-field>
+  <!-- <button
+    type="button"
+    mat-raised-button
+    (click)="openGallery()"
+    [disabled]="!productName"
+  >
+    Open Gallery
+  </button> -->
+
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category_id" required>
+      <mat-option
+        *ngFor="let category of categories"
+        value="{{ category.prodCategoryId }}"
+      >
+        {{ category.categoryName }}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      {{ requiredMsg }}
+    </mat-error>
+  </mat-form-field>
+
+  <div class="actions">
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      [disabled]="productForm.invalid"
+      (click)="
+        _data.createNewProduct(
+          productForm.value.name,
+          productForm.value.price,
+          productForm.value.image,
+          productForm.value.category_id
+        )
+      "
+    >
+      Add product
+    </button>
+    {{ productForm.value.name }}
+    {{ productForm.value.price }}
+    {{ productForm.value.image }}
+    {{ productForm.value.category_id }}
+    <!-- <button
+        type="button"
+        mat-raised-button
+        color="accent"
+        (click)="createProduct()"
+        *ngIf="!editMode"
+        >
+        Save product
+    </button> -->
+    <!-- <button
+        type="button"
+        mat-raised-button
+        color="accent"
+        (click)="editProduct()"
+        *ngIf="editMode"
+        >
+        Save changes
+    </button> -->
+  </div>
+</form>

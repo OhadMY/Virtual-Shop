@@ -10,6 +10,7 @@ export class DataService {
 
   public cartItems: CartItems[] = [];
   public totalPrice: number = 0;
+  public cartId: number;
 
   // User Routes
   public async login(eMail: string, userPassword: string) {
@@ -108,8 +109,9 @@ export class DataService {
         `http://localhost:1000/shoppingcarts/usercart/${userId}`
       );
       const data = await res.json();
-      const test = data[0];
-      return test;
+      const cart = data[0];
+      this.cartId = cart.shoppingCartId;
+      return cart;
     } catch (error) {
       console.log(error);
     }
@@ -210,8 +212,8 @@ export class DataService {
           }
         );
       }
-      await this.GetAllCartProducts(this.cartItems[0].cartId);
-      await this.getTotalPrice(this.cartItems[0].cartId);
+      await this.GetAllCartProducts(this.cartId);
+      await this.getTotalPrice(this.cartId);
     } catch (error) {
       console.log(error);
     }
@@ -229,8 +231,8 @@ export class DataService {
           },
         }
       );
-      await this.GetAllCartProducts(this.cartItems[0].cartId);
-      await this.getTotalPrice(this.cartItems[0].cartId);
+      await this.GetAllCartProducts(this.cartId);
+      await this.getTotalPrice(this.cartId);
     } catch (error) {
       console.log(error);
     }
@@ -248,8 +250,8 @@ export class DataService {
           },
         }
       );
-      await this.GetAllCartProducts(this.cartItems[0].cartId);
-      await this.getTotalPrice(this.cartItems[0].cartId);
+      await this.GetAllCartProducts(this.cartId);
+      await this.getTotalPrice(this.cartId);
     } catch (error) {
       console.log(error);
     }
@@ -270,8 +272,8 @@ export class DataService {
           }),
         }
       );
-      await this.GetAllCartProducts(this.cartItems[0].cartId);
-      await this.getTotalPrice(this.cartItems[0].cartId);
+      await this.GetAllCartProducts(this.cartId);
+      await this.getTotalPrice(this.cartId);
     } catch (error) {
       console.log(error);
     }
@@ -332,6 +334,33 @@ export class DataService {
       const category = await res.json();
       console.log(category);
       return category;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async createNewProduct(
+    prodName: number,
+    prodPrice: number,
+    prodImage: string,
+    categoryId: number
+  ) {
+    try {
+      await fetch(`http://localhost:1000/products/newproduct`, {
+        method: 'POST',
+        headers: {
+          authorization: localStorage.token,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          prodName,
+          prodPrice,
+          prodImage,
+          categoryId,
+        }),
+      });
+      await this.getAllProds();
+      console.log('Worked');
     } catch (error) {
       console.log(error);
     }
