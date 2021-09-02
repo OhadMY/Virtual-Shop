@@ -1,13 +1,5 @@
-.my-grid-list {
-  padding-top: 12px !important;
-  display: flex;
-  flex-direction: column;
-}
-
-@media (max-width: 800px) {
-  .flex-container {
-    flex-direction: column;
-  }
+* {
+  box-sizing: border-box;
 }
 
 .flex-container {
@@ -15,10 +7,6 @@
   flex-direction: row;
   text-align: center;
   justify-content: space-around;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 @media screen and (min-width: 1100px) {
