@@ -78,19 +78,15 @@
               productForm.value.price,
               productForm.value.image,
               productForm.value.category_id
-            )
+            );
+            resetForm()
           "
         >
           Add product
         </button>
       </div>
     </form>
-    <!-- 
 
-After Edit
-
-  
- -->
     <form [formGroup]="productForm" *ngIf="_data.editMode">
       <mat-icon>edit</mat-icon>
       <h3>Edit Product</h3>

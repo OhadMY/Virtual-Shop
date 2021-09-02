@@ -31,25 +31,24 @@ export class ProductFormComponent implements OnInit {
     console.log(this.categories);
   }
 
-  closeEdit() {
-    this._data.editMode = false;
+  resetForm() {
     this.productForm.patchValue({
       name: '',
       price: '',
       image: '',
       category_id: '',
     });
+  }
+
+  closeEdit() {
+    this._data.editMode = false;
+    this.resetForm();
     this._data.getAllProds();
   }
 
   confirmEdit() {
     this._data.editMode = false;
-    this.productForm.patchValue({
-      name: '',
-      price: '',
-      image: '',
-      category_id: '',
-    });
+    this.resetForm();
     this._data.getAllProds();
   }
 }
