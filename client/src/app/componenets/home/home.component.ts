@@ -10,8 +10,8 @@ export class HomeComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (window.innerWidth < 1000) {
-      this.colspan = 3;
-    }
+    // if (window.innerWidth < 1000) {
+    //   this.colspan = 3;
+    // }
   }
 }

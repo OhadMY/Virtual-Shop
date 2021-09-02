@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="login">
   <mat-card-title>{{
     !userName ? "Hello Guest" : "Hello " + userName
   }}</mat-card-title>
@@ -82,14 +82,14 @@
   </div>
   <img
     routerLink="/store"
-    class="image"
+    class="user-image"
     mat-card-image
     *ngIf="isUserConnected && openCart"
     src="http://localhost:1000/images/ShoppingCart.png"
   />
   <img
     routerLink="/store"
-    class="image"
+    class="admin-image"
     mat-card-image
     *ngIf="isAdminConnected"
     src="http://localhost:1000/images/Edit.jpg"

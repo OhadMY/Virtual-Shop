@@ -5,6 +5,8 @@
   padding-bottom: 15px;
 }
 
-.card {
-  max-width: 320px;
+.about {
+  height: 269px;
+  width: 320px;
+  margin: auto;
 }

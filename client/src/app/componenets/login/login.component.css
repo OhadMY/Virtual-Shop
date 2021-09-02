@@ -3,8 +3,14 @@ form {
   flex-direction: column;
 }
 
-.image {
-  width: 120px;
+.user-image {
+  width: 150px;
+  display: flex;
+  margin: auto;
+}
+
+.admin-image {
+  width: 270px;
   display: flex;
   margin: auto;
 }
@@ -30,4 +36,10 @@ mat-card {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.login {
+  height: 269px;
+  width: 320px;
+  margin: auto;
 }

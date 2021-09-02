@@ -123,9 +123,13 @@ export class DataService {
         `http://localhost:1000/shoppingcarts/totalprice/${shoppingCartId}`
       );
       const data = await res.json();
-      if (data.length === 0) return 0;
-      else {
-        const total = data[0].Total;
+      let total;
+      if (data.length === 0) {
+        this.totalPrice = 0;
+        total = 0;
+        return total;
+      } else {
+        total = data[0].Total;
         this.totalPrice = total;
         return total;
       }

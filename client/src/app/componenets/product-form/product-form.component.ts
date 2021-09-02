@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
+import { StoreComponent } from '../store/store.component';
 
 @Component({
   selector: 'app-product-form',
@@ -12,7 +13,11 @@ export class ProductFormComponent implements OnInit {
   public requiredMsg = 'Field is required.';
   public categories: Array<any> = [];
 
-  constructor(public _data: DataService, private formBuilder: FormBuilder) {
+  constructor(
+    public _data: DataService,
+    private formBuilder: FormBuilder,
+    public _store: StoreComponent
+  ) {
     this.productForm = this.formBuilder.group({
       name: [null, Validators.required],
       price: [null, Validators.required],
