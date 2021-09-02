@@ -41,7 +41,9 @@ export class LoginComponent implements OnInit {
         this.openCart.cartCreationTime = moment(
           this.openCart.cartCreationTime
         ).format('DD-MM-YYYY');
-        await this._data.getTotalPrice(this.openCart.shoppingCartId);
+        this.openCartTotalPrice = await this._data.getTotalPrice(
+          this.openCart.shoppingCartId
+        );
       }
     } catch (error) {
       this.isAuthenticated = false;
