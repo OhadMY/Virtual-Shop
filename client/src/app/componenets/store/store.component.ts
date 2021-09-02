@@ -35,17 +35,13 @@ export class StoreComponent implements OnInit {
       this.isAuthenticated = true;
       if (decodedJwtData.user.userType === 0) this.isUserConnected = true;
       else this.isAdminConnected = true;
-      if (this.isAuthenticated) {
-        this.openCart = await this._data.getUserCart(
-          decodedJwtData.user.userId
-        );
-        this.openCart.cartCreationTime = moment(
-          this.openCart.cartCreationTime
-        ).format('DD-MM-YYYY');
-        await this._data.getTotalPrice(this.openCart.shoppingCartId);
-        await this._data.getAllProds();
-        this.categories = await this._data.getProdCategories();
-      }
+      this.openCart = await this._data.getUserCart(decodedJwtData.user.userId);
+      this.openCart.cartCreationTime = moment(
+        this.openCart.cartCreationTime
+      ).format('DD-MM-YYYY');
+      await this._data.getTotalPrice(this.openCart.shoppingCartId);
+      await this._data.getAllProds();
+      this.categories = await this._data.getProdCategories();
     } catch (error) {
       this.isAuthenticated = false;
     }

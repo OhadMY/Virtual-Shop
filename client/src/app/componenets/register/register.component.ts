@@ -10,6 +10,7 @@ import { passwordValidator } from './custom-validators';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  public isAuthenticated: boolean = false;
   public eMailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   public isLinear: boolean = false;
   public registerForm1: FormGroup;
@@ -55,7 +56,18 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    try {
+      const jwt = localStorage.getItem('token');
+      let jwtData = jwt.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      this.isAuthenticated = true;
+    } catch (error) {
+      this.isAuthenticated = false;
+    }
+    if (this.isAuthenticated) this._r.navigate(['/home']);
+  }
 
   register() {
     const newUser = {

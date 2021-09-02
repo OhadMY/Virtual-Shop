@@ -34,6 +34,9 @@ import { StoreComponent } from './componenets/store/store.component';
 import { CartComponent } from './componenets/cart/cart.component';
 import { ProductFormComponent } from './componenets/product-form/product-form.component';
 import { AddModalComponent } from './componenets/add-modal/add-modal.component';
+import { CheckoutComponent } from './componenets/checkout/checkout.component';
+import { ReceiptComponent } from './componenets/receipt/receipt.component';
+import { OrderComponent } from './componenets/order/order.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { AddModalComponent } from './componenets/add-modal/add-modal.component';
     CartComponent,
     ProductFormComponent,
     AddModalComponent,
+    CheckoutComponent,
+    ReceiptComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
