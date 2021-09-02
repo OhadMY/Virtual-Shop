@@ -63,5 +63,10 @@ mat-form-field.mat-form-field {
   width: 100%;
 }
 mat-icon {
+  color: gray;
   padding-right: 10px;
+}
+
+.mat-icon:hover {
+  color: rgb(255, 67, 99);
 }

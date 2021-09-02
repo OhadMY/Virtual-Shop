@@ -30,4 +30,26 @@ export class ProductFormComponent implements OnInit {
     this.categories = await this._data.getProdCategories();
     console.log(this.categories);
   }
+
+  closeEdit() {
+    this._data.editMode = false;
+    this.productForm.patchValue({
+      name: '',
+      price: '',
+      image: '',
+      category_id: '',
+    });
+    this._data.getAllProds();
+  }
+
+  confirmEdit() {
+    this._data.editMode = false;
+    this.productForm.patchValue({
+      name: '',
+      price: '',
+      image: '',
+      category_id: '',
+    });
+    this._data.getAllProds();
+  }
 }

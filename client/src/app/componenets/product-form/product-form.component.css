@@ -25,3 +25,18 @@ form {
   display: flex;
   justify-content: space-between;
 }
+
+.actions {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mat-icon:hover {
+  color: rgb(255, 67, 99);
+}
+
+.mat-icon {
+  color: gray;
+}

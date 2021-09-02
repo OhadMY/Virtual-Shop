@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import ProductsModel from 'src/app/models/products.model';
 import { DataService } from 'src/app/services/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddModalComponent } from '../add-modal/add-modal.component';
+import ProductsModel from 'src/app/models/products.model';
 
 @Component({
   selector: 'app-store',
@@ -23,8 +23,6 @@ export class StoreComponent implements OnInit {
   public isAdminConnected: boolean = false;
   public isUserConnected: boolean = false;
   public openCart: any = null;
-  public openCartTotalPrice: number = null;
-  public products: Array<ProductsModel> = [];
   public categories: Array<any> = [];
   public filteredString: string;
 
@@ -44,10 +42,8 @@ export class StoreComponent implements OnInit {
         this.openCart.cartCreationTime = moment(
           this.openCart.cartCreationTime
         ).format('DD-MM-YYYY');
-        this.openCartTotalPrice = await this._data.getTotalPrice(
-          this.openCart.shoppingCartId
-        );
-        this.products = await this._data.getAllProds();
+        await this._data.getTotalPrice(this.openCart.shoppingCartId);
+        await this._data.getAllProds();
         this.categories = await this._data.getProdCategories();
       }
     } catch (error) {
@@ -65,5 +61,10 @@ export class StoreComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) this._data.addProdToCart(prodId, result, shoppingCartId);
     });
+  }
+
+  editProduct(product: ProductsModel) {
+    this._data.prodForEdit = product;
+    this._data.editMode = true;
   }
 }

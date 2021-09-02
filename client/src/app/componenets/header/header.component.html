@@ -1,10 +1,11 @@
 <mat-toolbar color="primary" fxLayoutAlign="space-between center">
   <mat-toolbar-row>
+    <img src="http://localhost:1000/images/Shop.png" routerLink="/home" />
     <a routerLink="/home">My Store</a>
     <span class="example-spacer"></span>
     <button
-      mat-stroked-button
-      color="warn"
+      mat-raised-button
+      color="accent"
       (click)="_data.logout()"
       *ngIf="isAuthenticated"
     >

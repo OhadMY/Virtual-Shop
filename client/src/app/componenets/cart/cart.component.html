@@ -1,5 +1,5 @@
 <mat-tab-group>
-  <mat-tab label="Welcome to your Shopping Cart and have a great day :)">
+  <mat-tab label="Welcome to your Shopping Cart and have a great day 😊">
     <div class="header">
       <h1>My Cart</h1>
       <button
@@ -75,20 +75,13 @@
           Edit
         </th>
         <td mat-cell *matCellDef="let product" class="actions">
-          <mat-icon
-            class="material-icons"
-            (click)="_data.addOneProdQuantity(product.prodInCartId)"
-          >
+          <mat-icon (click)="_data.addOneProdQuantity(product.prodInCartId)">
             add_circle
           </mat-icon>
-          <mat-icon
-            class="material-icons"
-            (click)="_data.deleteProduct(product.prodInCartId)"
-          >
+          <mat-icon (click)="_data.deleteProduct(product.prodInCartId)">
             delete
           </mat-icon>
           <mat-icon
-            class="material-icons"
             (click)="
               _data.removeOneProdQuantity(
                 product.prodInCartId,
@@ -116,7 +109,7 @@
       >
         <mat-icon>remove_shopping_cart</mat-icon> Empty cart
       </button>
-      <button mat-raised-button color="accent">
+      <button mat-raised-button color="primary">
         <!-- <button mat-raised-button color="accent" (click)="checkout()"> -->
         Checkout
       </button>

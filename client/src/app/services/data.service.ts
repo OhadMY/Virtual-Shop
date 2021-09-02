@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import CartItems from '../models/cartitems.model';
+import ProductsModel from 'src/app/models/products.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +9,12 @@ import CartItems from '../models/cartitems.model';
 export class DataService {
   constructor(public _r: Router) {}
 
+  public products: Array<ProductsModel> = [];
   public cartItems: CartItems[] = [];
   public totalPrice: number = 0;
   public cartId: number;
+  public editMode: boolean = false;
+  public prodForEdit: ProductsModel;
 
   // User Routes
   public async login(eMail: string, userPassword: string) {
@@ -303,6 +307,7 @@ export class DataService {
         },
       });
       const products = await res.json();
+      this.products = products;
       return products;
     } catch (error) {
       console.log(error);
@@ -364,7 +369,34 @@ export class DataService {
         }),
       });
       await this.getAllProds();
-      console.log('Worked');
+      console.log(this.products);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async editProduct(
+    prodId: number,
+    prodName: number,
+    prodPrice: number,
+    prodImage: string,
+    categoryId: number
+  ) {
+    try {
+      await fetch(`http://localhost:1000/products/editproduct/${prodId}`, {
+        method: 'PUT',
+        headers: {
+          authorization: localStorage.token,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          prodName,
+          prodPrice,
+          prodImage,
+          categoryId,
+        }),
+      });
+      await this.getAllProds();
     } catch (error) {
       console.log(error);
     }

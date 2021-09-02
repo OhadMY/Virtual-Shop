@@ -30,8 +30,6 @@ export class LoginComponent implements OnInit {
       let jwtData = jwt.split('.')[1];
       let decodedJwtJsonData = window.atob(jwtData);
       let decodedJwtData = JSON.parse(decodedJwtJsonData);
-      // console.log(jwtData);
-      // console.log(decodedJwtData);
       this.userName = decodedJwtData.user.firstName;
       this.isAuthenticated = true;
       if (decodedJwtData.user.userType === 0) this.isUserConnected = true;
@@ -43,9 +41,7 @@ export class LoginComponent implements OnInit {
         this.openCart.cartCreationTime = moment(
           this.openCart.cartCreationTime
         ).format('DD-MM-YYYY');
-        this.openCartTotalPrice = await this._data.getTotalPrice(
-          this.openCart.shoppingCartId
-        );
+        await this._data.getTotalPrice(this.openCart.shoppingCartId);
       }
     } catch (error) {
       this.isAuthenticated = false;

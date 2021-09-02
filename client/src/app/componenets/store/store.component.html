@@ -26,7 +26,7 @@
           ><div class="main">
             <ng-container>
               <mat-card
-                *ngFor="let product of products | filter: filteredString"
+                *ngFor="let product of _data.products | filter: filteredString"
                 class="my-card h-100"
               >
                 <img mat-card-image [src]="product.prodImage" alt="image" />
@@ -37,7 +37,7 @@
                     *ngIf="isUserConnected"
                     type="button"
                     mat-raised-button
-                    color="accent"
+                    color="primary"
                     (click)="
                       openDialog(product.prodId, openCart.shoppingCartId)
                     "
@@ -49,14 +49,14 @@
                     *ngIf="isAdminConnected"
                     type="button"
                     mat-raised-button
-                    color="accent"
+                    color="primary"
+                    (click)="editProduct(product)"
                   >
-                    <!-- (click)="editProduct(product)" -->
                     Edit
                   </button>
                 </mat-card-actions>
               </mat-card>
-              <h3 class="result-message" *ngIf="products.length === 0">
+              <h3 class="result-message" *ngIf="_data.products.length === 0">
                 Sorry! No products found...☹️
               </h3>
             </ng-container>
@@ -68,7 +68,7 @@
           label="{{ category.categoryName }}"
         >
           <div class="main">
-            <ng-container *ngFor="let product of products">
+            <ng-container *ngFor="let product of _data.products">
               <mat-card
                 *ngIf="category.prodCategoryId === product.categoryId"
                 class="my-card h-100"
@@ -81,7 +81,7 @@
                     *ngIf="isUserConnected"
                     type="button"
                     mat-raised-button
-                    color="accent"
+                    color="primary"
                     (click)="
                       openDialog(product.prodId, openCart.shoppingCartId)
                     "
@@ -92,14 +92,14 @@
                     *ngIf="isAdminConnected"
                     type="button"
                     mat-raised-button
-                    color="accent"
+                    color="primary"
+                    (click)="editProduct(product)"
                   >
-                    <!-- (click)="editProduct(product)" -->
                     Edit
                   </button>
                 </mat-card-actions>
               </mat-card>
-              <h3 class="result-message" *ngIf="products.length === 0">
+              <h3 class="result-message" *ngIf="_data.products.length === 0">
                 Sorry! No products found...☹️
               </h3>
             </ng-container>

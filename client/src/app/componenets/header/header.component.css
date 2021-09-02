@@ -12,3 +12,10 @@ span {
 .example-spacer {
   flex: 1 1 auto;
 }
+
+img {
+  height: 60px;
+  width: auto;
+  padding-right: 5px;
+  cursor: pointer;
+}
