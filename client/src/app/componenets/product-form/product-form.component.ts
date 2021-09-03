@@ -28,7 +28,6 @@ export class ProductFormComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.categories = await this._data.getProdCategories();
-    console.log(this.categories);
   }
 
   resetForm() {

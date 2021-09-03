@@ -1,3 +1,5 @@
+-- Password for AdminAcc and UserAcc is: 12345
+
 CREATE DATABASE fourth_project;
 
 USE fourth_project;
