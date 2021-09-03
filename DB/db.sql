@@ -81,20 +81,6 @@ FOREIGN KEY (prodCartId) REFERENCES products(prodId),
 PRIMARY KEY (prodInCartId)
 );
 
-SELECT prodInCart.cartId,prodInCart.prodInCartId,products.prodId,products.prodImage,products.prodName,prodInCart.quantity,products.prodPrice, SUM(prodInCart.quantity * products.prodPrice) AS Total 
-FROM prodInCart JOIN
-     products ON 
-     prodInCart.prodCartId = products.prodId
-     WHERE cartId=2
-     -- groupby prodInCartId sums up each product in every cart
-     -- groupby cartId sums up all products in each cart
-GROUP BY prodInCart.prodInCartId;
-select * from ProdInCart;
-SELECT * FROM shoppingCarts;
-SELECT * FROM products;
-SELECT * FROM prodCategory;
-SELECT * FROM users;
-
 CREATE TABLE orders (
 orderId INT AUTO_INCREMENT,
 userId INT,
@@ -104,8 +90,8 @@ FOREIGN KEY (cartId) REFERENCES shoppingCarts(shoppingCartId),
 totalPrice INT,
 deliveryCity VARCHAR(60),
 deliveryStreet VARCHAR(60),
-deliveryDate DATETIME,
-creditCard INT,
+deliveryDate DATE,
+creditCard VARCHAR(16),
 orderCreationTime DATETIME DEFAULT NOW() NOT NULL,
 PRIMARY KEY (orderId)
 );
