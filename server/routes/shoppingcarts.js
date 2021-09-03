@@ -14,20 +14,6 @@ router.get("/totalorders", async (req, res) => {
   }
 });
 
-router.put("/closecart/:shoppingCartId", verifyUser, async (req, res) => {
-  try {
-    const { shoppingCartId } = req.params;
-    myQuery(`SET SQL_SAFE_UPDATES = 0;`);
-    const lastClosedCart = await myQuery(
-      `UPDATE shoppingCarts SET cartStatus=1 WHERE cartStatus=0 AND shoppingCartId=${shoppingCartId};`
-    );
-    myQuery(`SET SQL_SAFE_UPDATES = 1;`);
-    res.status(200).send(lastClosedCart);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
 router.get("/usercart/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
@@ -156,6 +142,20 @@ router.delete("/emptycart/:cartId", verifyUser, async (req, res) => {
       `DELETE FROM ProdInCart WHERE cartId=${cartId}`
     );
     res.status(200).send(deleted);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.put("/closecart/:shoppingCartId", verifyUser, async (req, res) => {
+  try {
+    const { shoppingCartId } = req.params;
+    myQuery(`SET SQL_SAFE_UPDATES = 0;`);
+    const lastClosedCart = await myQuery(
+      `UPDATE shoppingCarts SET cartStatus=1 WHERE cartStatus=0 AND shoppingCartId=${shoppingCartId};`
+    );
+    myQuery(`SET SQL_SAFE_UPDATES = 1;`);
+    res.status(200).send("Cart Closed");
   } catch (error) {
     res.status(500).send(error);
   }

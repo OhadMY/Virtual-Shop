@@ -369,7 +369,6 @@ export class DataService {
         }),
       });
       await this.getAllProds();
-      console.log(this.products);
     } catch (error) {
       console.log(error);
     }

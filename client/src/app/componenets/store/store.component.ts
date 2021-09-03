@@ -35,7 +35,6 @@ export class StoreComponent implements OnInit {
       this.isAuthenticated = true;
       if (decodedJwtData.user.userType === 0) this.isUserConnected = true;
       else this.isAdminConnected = true;
-      console.log('here');
       if (this.isUserConnected) {
         this.openCart = await this._data.getUserCart(
           decodedJwtData.user.userId
