@@ -9,7 +9,6 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class CheckoutComponent implements OnInit {
   public isAuthenticatedUser: boolean = false;
-  public openCart: any = null;
 
   constructor(public _r: Router, public _data: DataService) {}
 
@@ -20,9 +19,6 @@ export class CheckoutComponent implements OnInit {
       let decodedJwtJsonData = window.atob(jwtData);
       let decodedJwtData = JSON.parse(decodedJwtJsonData);
       if (decodedJwtData.user.userType === 0) this.isAuthenticatedUser = true;
-      this.openCart = await this._data.getUserCart(decodedJwtData.user.userId);
-
-      console.log(this.openCart);
     } catch (error) {
       this.isAuthenticatedUser = false;
     }

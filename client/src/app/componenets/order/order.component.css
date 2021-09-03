@@ -1,0 +1,33 @@
+mat-form-field {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 250px;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clickable {
+  cursor: pointer;
+  color: rgb(122, 117, 117);
+}
+
+.credit-icon {
+  color: rgb(122, 117, 117);
+}
+
+mat-card {
+  width: 400px;
+  margin: auto;
+}
+
+.material-icons {
+  color: gray;
+  cursor: pointer;
+}
+
+.mat-icon:hover {
+  color: rgb(255, 67, 99);
+  cursor: pointer;
+}

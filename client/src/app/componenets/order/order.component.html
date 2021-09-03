@@ -1,1 +1,89 @@
-<p>order works!</p>
+<mat-card>
+  <mat-card-subtitle>
+    <mat-icon>local_shipping</mat-icon>&nbsp; Order
+  </mat-card-subtitle>
+
+  <mat-card-content>
+    <form [formGroup]="orderForm">
+      <mat-form-field (dblclick)="setUserCity()">
+        <input
+          type="text"
+          placeholder="City"
+          matInput
+          formControlName="deliveryCity"
+          [matAutocomplete]="auto"
+          matTooltip="Dblclick to fill your city"
+        />
+        <mat-error *ngIf="requiredValidation('deliveryCity')">
+          {{ requiredMsg }}
+        </mat-error>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let deliveryCity of deliveryCities"
+            [value]="deliveryCity"
+          >
+            {{ deliveryCity }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matSuffix class="clickable">location_city</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field (dblclick)="setUserStreet()">
+        <input
+          matTooltip="Dblclick to fill your street"
+          matInput
+          formControlName="deliveryStreet"
+          placeholder="Street"
+          type="text"
+        />
+        <mat-error *ngIf="requiredValidation('deliveryStreet')">
+          {{ requiredMsg }}
+        </mat-error>
+        <mat-icon matSuffix class="material-icons-outlined clickable"
+          >home</mat-icon
+        >
+      </mat-form-field>
+
+      <mat-form-field (click)="picker.open()">
+        <mat-label>Delivery Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="deliveryDate"
+          [min]="minDate"
+          [matDatepickerFilter]="myFilter"
+        />
+        <mat-error *ngIf="requiredValidation('deliveryDate')">
+          {{ requiredMsg }}
+        </mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          formControlName="creditCard"
+          placeholder="Credit Card"
+        />
+        <mat-error *ngIf="requiredValidation('creditCard')">
+          {{ requiredMsg }}
+        </mat-error>
+        <mat-error *ngIf="orderForm.get('creditCard')?.errors">
+          Credit card must be 14~16 digits long.
+        </mat-error>
+        <mat-icon matSuffix class="credit-icon">credit_card</mat-icon>
+      </mat-form-field>
+      <mat-card-actions>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="orderForm.invalid"
+        >
+          Order
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

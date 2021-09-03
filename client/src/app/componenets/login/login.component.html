@@ -28,12 +28,7 @@
   <div paddingTop="50px" *ngIf="!isAuthenticated">
     <mat-card-content>
       <mat-card-subtitle>Please Sign in or Register</mat-card-subtitle>
-      <form
-        [formGroup]="loginForm"
-        fxLayout="column"
-        fxLayoutAlign="start start"
-        fxLayoutGap="15px"
-      >
+      <form [formGroup]="loginForm">
         <mat-form-field>
           <input
             matInput

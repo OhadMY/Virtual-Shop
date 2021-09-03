@@ -1,1 +1,73 @@
-<p>receipt works!</p>
+<mat-card>
+  <div class="header">
+    <button type="button" mat-button routerLink="/store">
+      <mat-icon>arrow_back</mat-icon>Back to shop
+    </button>
+  </div>
+
+  <mat-card-subtitle>
+    <h3>Cart Preview</h3>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Search product" />
+    </mat-form-field>
+  </mat-card-subtitle>
+
+  <table
+    mat-table
+    [dataSource]="_data.cartItems"
+    className="padding-table-columns"
+  >
+    <!-- Image Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef>Image</th>
+      <td mat-cell *matCellDef="let product" class="prodImage">
+        <img [src]="product.prodImage" />
+      </td>
+      <td mat-footer-cell *matFooterCellDef>Total</td>
+    </ng-container>
+
+    <!-- Product Column -->
+    <ng-container matColumnDef="product">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        style="text-align: center; vertical-align: middle"
+      >
+        Product
+      </th>
+      <td mat-cell *matCellDef="let product">{{ product.prodName }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        style="text-align: left; vertical-align: middle"
+      >
+        Quantity
+      </th>
+      <td mat-cell *matCellDef="let product">{{ product.quantity }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let product">{{ product.prodPrice }}$</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let product">{{ product.Total }}$</td>
+      <td mat-footer-cell *matFooterCellDef>{{ _data.getCartSum() }}$</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="test"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+</mat-card>

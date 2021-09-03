@@ -3,12 +3,7 @@
     <mat-card-title> Register </mat-card-title>
     <mat-vertical-stepper #stepper linear>
       <mat-step [stepControl]="registerForm1">
-        <form
-          [formGroup]="registerForm1"
-          fxLayout="column"
-          fxLayoutAlign="center center"
-          fxLayoutGap="10px"
-        >
+        <form [formGroup]="registerForm1">
           <ng-template matStepLabel>Fill out account details</ng-template>
 
           <mat-form-field>
@@ -74,12 +69,7 @@
       </mat-step>
 
       <mat-step [stepControl]="registerForm2">
-        <form
-          [formGroup]="registerForm2"
-          fxLayout="column"
-          fxLayoutAlign="center center"
-          fxLayoutGap="10px"
-        >
+        <form [formGroup]="registerForm2">
           <ng-template matStepLabel>Fill out user details</ng-template>
 
           <mat-form-field>
@@ -139,8 +129,8 @@
 
       <mat-step>
         <ng-template matStepLabel>Done</ng-template>
-        <h3 fxLayoutAlign="center center">You are now done.</h3>
-        <div fxLayoutAlign="center center">
+        <h3>You are now done.</h3>
+        <div>
           <button mat-button matStepperPrevious>Back</button>
           <button
             mat-button

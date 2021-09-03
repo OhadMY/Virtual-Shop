@@ -103,7 +103,7 @@ totalPrice INT,
 deliveryCity VARCHAR(60),
 deliveryStreet VARCHAR(60),
 deliveryDate DATETIME,
+creditCard INT,
 orderCreationTime DATETIME DEFAULT NOW() NOT NULL,
-CVV VARCHAR(4),
 PRIMARY KEY (orderId)
 );

@@ -11,7 +11,6 @@ import { StoreComponent } from '../store/store.component';
 })
 export class CartComponent implements OnInit {
   public openCart: any = null;
-
   public displayedColumns: string[] = [
     'image',
     'product',
