@@ -139,7 +139,7 @@ router.put("/closecart/:shoppingCartId", verifyUser, async (req, res) => {
   try {
     const { shoppingCartId } = req.params;
     myQuery(`SET SQL_SAFE_UPDATES = 0;`);
-    const lastClosedCart = await myQuery(
+    await myQuery(
       `UPDATE shoppingCarts SET cartStatus=1 WHERE cartStatus=0 AND shoppingCartId=${shoppingCartId};`
     );
     myQuery(`SET SQL_SAFE_UPDATES = 1;`);

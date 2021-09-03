@@ -389,12 +389,61 @@ export class DataService {
     }
   }
 
+  public async closeCart(shoppingCartId: number) {
+    try {
+      await fetch(
+        `http://localhost:1000/shoppingcarts/closecart/${shoppingCartId}`,
+        {
+          method: 'PUT',
+          headers: {
+            authorization: localStorage.token,
+            'content-type': 'application/json',
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // Orders Routes
   public async getTotalOrders() {
     try {
       const res = await fetch('http://localhost:1000/orders/totalorders');
       const order = await res.json();
       return order;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async createNewOrder(
+    userId: number,
+    cartId: number,
+    totalPrice: number,
+    deliveryCity: string,
+    deliveryStreet: string,
+    deliveryDate: string,
+    creditCard: number
+  ) {
+    try {
+      await fetch(`http://localhost:1000/orders/neworder`, {
+        method: 'POST',
+        headers: {
+          authorization: localStorage.token,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          cartId,
+          totalPrice,
+          deliveryCity,
+          deliveryStreet,
+          deliveryDate,
+          creditCard,
+        }),
+      });
+      await this.getAllProds();
     } catch (error) {
       console.log(error);
     }

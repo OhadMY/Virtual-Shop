@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import UsersModel from 'src/app/models/users.model';
 import { DataService } from 'src/app/services/data.service';
@@ -12,6 +13,8 @@ import { DataService } from 'src/app/services/data.service';
 export class OrderComponent implements OnInit {
   public connectedUser: UsersModel | null;
   public orderForm: FormGroup;
+  public openCart: any = null;
+  public openCartTotalPrice: number = null;
   public requiredMsg: string = 'Field is required.';
   public minDate: Date;
   public unavailableDates = [];
@@ -28,7 +31,11 @@ export class OrderComponent implements OnInit {
     'Holon',
   ];
 
-  constructor(private formBuilder: FormBuilder, public _data: DataService) {
+  constructor(
+    public _r: Router,
+    private formBuilder: FormBuilder,
+    public _data: DataService
+  ) {
     this.orderForm = this.formBuilder.group({
       deliveryCity: [null, Validators.required],
       deliveryStreet: [null, Validators.required],
@@ -44,12 +51,16 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const jwt = localStorage.getItem('token');
     let jwtData = jwt.split('.')[1];
     let decodedJwtJsonData = window.atob(jwtData);
     let decodedJwtData = JSON.parse(decodedJwtJsonData);
+    this.openCart = await this._data.getUserCart(decodedJwtData.user.userId);
     this.connectedUser = decodedJwtData.user;
+    this.openCartTotalPrice = await this._data.getTotalPrice(
+      this.openCart.shoppingCartId
+    );
     this.minDate = new Date();
     this.minDate.setDate(this.minDate.getDate() + 1);
   }
@@ -81,4 +92,20 @@ export class OrderComponent implements OnInit {
       return moment(date._id.deliveryDate).format('YYYY-MM-DD') === time;
     });
   };
+
+  orderFeedback() {
+    this._data.closeCart(this.openCart.shoppingCartId);
+    this._data.createNewOrder(
+      this.connectedUser.userId,
+      this.openCart.shoppingCartId,
+      this.openCartTotalPrice,
+      this.orderForm.value.deliveryCity,
+      this.orderForm.value.deliveryStreet,
+      this.orderForm.value.deliveryDate.format('en-US'),
+      this.orderForm.value.creditCard
+    );
+    console.log(this.orderForm.value.deliveryDate.format('en-US'));
+    alert('Cart Closed');
+    this._r.navigate(['/home']);
+  }
 }
