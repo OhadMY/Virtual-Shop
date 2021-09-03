@@ -95,18 +95,6 @@ export class DataService {
   }
 
   // ShoppingCarts Routes
-  public async getTotalOrders() {
-    try {
-      const res = await fetch(
-        'http://localhost:1000/shoppingcarts/totalorders'
-      );
-      const order = await res.json();
-      return order;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   public async getUserCart(userId: number) {
     try {
       const res = await fetch(
@@ -396,6 +384,17 @@ export class DataService {
         }),
       });
       await this.getAllProds();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // Orders Routes
+  public async getTotalOrders() {
+    try {
+      const res = await fetch('http://localhost:1000/orders/totalorders');
+      const order = await res.json();
+      return order;
     } catch (error) {
       console.log(error);
     }
