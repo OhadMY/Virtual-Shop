@@ -94,17 +94,19 @@ export class OrderComponent implements OnInit {
   };
 
   orderFeedback() {
+    let tempCard = this.orderForm.value.creditCard.toString();
+    const lastFourDigits = parseInt(tempCard.slice(tempCard.length - 4));
     this._data.closeCart(this.openCart.shoppingCartId);
-    this._data.createNewOrder(
+    const res = this._data.createNewOrder(
       this.connectedUser.userId,
       this.openCart.shoppingCartId,
       this.openCartTotalPrice,
       this.orderForm.value.deliveryCity,
       this.orderForm.value.deliveryStreet,
-      this.orderForm.value.deliveryDate.format('en-US'),
-      this.orderForm.value.creditCard
+      moment(this.orderForm.value.deliveryDate).format('YYYY-MM-DD').toString(),
+      lastFourDigits
     );
-    console.log(this.orderForm.value.deliveryDate.format('en-US'));
+    console.log(res);
     alert('Cart Closed');
     this._r.navigate(['/home']);
   }
