@@ -52,9 +52,35 @@ router.get("/invoice", (req, res, next) => {
     "Content-Disposition": "attachment;filename=invoice.pdf",
   });
 
+  const invoiceData = {
+    shipping: {
+      name: "Styx San",
+      street: "Yefe Nof",
+      city: "Nahariya",
+    },
+    items: [
+      {
+        item: "TC 100",
+        description: "Toner Cartridge",
+        quantity: 2,
+        amount: 6000,
+      },
+      {
+        item: "USB_EXT",
+        description: "USB Cable Extender",
+        quantity: 1,
+        amount: 2000,
+      },
+    ],
+    subtotal: 8000,
+    paid: 0,
+    invoice_nr: 1,
+  };
+
   pdfService.buildPDF(
     (chunk) => stream.write(chunk),
-    () => stream.end()
+    () => stream.end(),
+    invoiceData
   );
 });
 

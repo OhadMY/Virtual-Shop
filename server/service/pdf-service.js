@@ -1,39 +1,14 @@
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
 
-const invoice = {
-  shipping: {
-    name: "Styx San",
-    street: "Yefe Nof",
-    city: "Nahariya",
-  },
-  items: [
-    {
-      item: "TC 100",
-      description: "Toner Cartridge",
-      quantity: 2,
-      amount: 6000,
-    },
-    {
-      item: "USB_EXT",
-      description: "USB Cable Extender",
-      quantity: 1,
-      amount: 2000,
-    },
-  ],
-  subtotal: 8000,
-  paid: 0,
-  invoice_nr: 1,
-};
+function buildPDF(dataCallback, endCallback, invoiceData) {
+  const invoice = invoiceData;
 
-function buildPDF(dataCallback, endCallback) {
   const doc = new PDFDocument({ margin: 50 });
 
-  //   Callbacks to stream data to user
   doc.on("data", dataCallback);
   doc.on("end", endCallback);
 
-  //   Calling functions to insert data into PDF file
   generateHeader(doc);
   generateCustomerInformation(doc, invoice);
   generateInvoiceTable(doc, invoice);
@@ -41,10 +16,9 @@ function buildPDF(dataCallback, endCallback) {
 
   doc.end();
 
-  // Functions
   function generateHeader(doc) {
     doc
-      //   .image("./images/shop.png", 50, 45, { width: 50 })
+      .image("./images/shop.png", 50, 45, { width: 50 })
       .fillColor("#444444")
       .fontSize(20)
       .text("MyStore", 110, 56)
