@@ -1,0 +1,18 @@
+<div class="dialog">
+  <h2 mat-dialog-title>Order Completed</h2>
+
+  <mat-dialog-content>
+    Download your receipt or return to home page.
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="actions">
+    <a href="http://localhost:1000/orders/invoice">
+      <button mat-raised-button color="primary" [mat-dialog-close]="false">
+        Download Receipt
+      </button>
+    </a>
+    <button mat-raised-button color="accent" [mat-dialog-close]="false">
+      Return Home
+    </button>
+  </mat-dialog-actions>
+</div>

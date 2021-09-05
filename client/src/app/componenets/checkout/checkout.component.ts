@@ -18,7 +18,11 @@ export class CheckoutComponent implements OnInit {
       let jwtData = jwt.split('.')[1];
       let decodedJwtJsonData = window.atob(jwtData);
       let decodedJwtData = JSON.parse(decodedJwtJsonData);
-      if (decodedJwtData.user.userType === 0) this.isAuthenticatedUser = true;
+      if (
+        decodedJwtData.user.userType === 0 &&
+        this._data.cartItems.length !== 0
+      )
+        this.isAuthenticatedUser = true;
     } catch (error) {
       this.isAuthenticatedUser = false;
     }

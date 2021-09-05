@@ -61,6 +61,7 @@ router.get("/invoice", (req, res, next) => {
     () => stream.end(),
     invoiceData
   );
+  invoiceData = "";
 });
 
 module.exports = router;

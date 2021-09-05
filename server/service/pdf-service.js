@@ -48,7 +48,7 @@ function buildPDF(dataCallback, endCallback, invoiceData) {
       // .text(`Invoice Date: ${new Date().toLocaleDateString("he-IL")}`, 50, 215)
       .fontSize(10)
       .text(`Delivery Date: ${invoice.deliveryDate}`, 50, 200)
-      .text(`Name: ${invoice.firstName}, ${invoice.lastName}`, 50, 215)
+      .text(`Name: ${invoice.firstName} ${invoice.lastName}`, 50, 215)
       .text(
         `Adress: ${invoice.deliveryCity}, ${invoice.deliveryStreet}`,
         50,

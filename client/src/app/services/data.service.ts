@@ -451,12 +451,4 @@ export class DataService {
       console.log(error);
     }
   }
-
-  public async getInvoice() {
-    try {
-      await fetch(`http://localhost:1000/orders/invoice`);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }

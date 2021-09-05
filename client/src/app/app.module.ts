@@ -40,6 +40,7 @@ import { AddModalComponent } from './componenets/add-modal/add-modal.component';
 import { CheckoutComponent } from './componenets/checkout/checkout.component';
 import { ReceiptComponent } from './componenets/receipt/receipt.component';
 import { OrderComponent } from './componenets/order/order.component';
+import { DownloadModalComponent } from './componenets/download-modal/download-modal.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { OrderComponent } from './componenets/order/order.component';
     CheckoutComponent,
     ReceiptComponent,
     OrderComponent,
+    DownloadModalComponent,
   ],
   imports: [
     BrowserModule,

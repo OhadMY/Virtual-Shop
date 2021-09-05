@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import UsersModel from 'src/app/models/users.model';
 import { DataService } from 'src/app/services/data.service';
+import { DownloadModalComponent } from '../download-modal/download-modal.component';
 
 @Component({
   selector: 'app-order',
@@ -35,7 +37,8 @@ export class OrderComponent implements OnInit {
   constructor(
     public _r: Router,
     private formBuilder: FormBuilder,
-    public _data: DataService
+    public _data: DataService,
+    public dialog: MatDialog
   ) {
     this.orderForm = this.formBuilder.group({
       deliveryCity: [null, Validators.required],
@@ -109,6 +112,7 @@ export class OrderComponent implements OnInit {
 
     let tempCard = this.orderForm.value.creditCard.toString();
     const lastFourDigits = parseInt(tempCard.slice(tempCard.length - 4));
+
     this._data.closeCart(this.openCart.shoppingCartId);
     this._data.createNewOrder(
       this.connectedUser.userId,
@@ -121,6 +125,9 @@ export class OrderComponent implements OnInit {
       this.invoiceData
     );
 
-    // this._r.navigate(['/home']);
+    let dialogRef = this.dialog.open(DownloadModalComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this._r.navigate(['/home']);
+    });
   }
 }
