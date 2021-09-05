@@ -424,9 +424,11 @@ export class DataService {
     deliveryCity: string,
     deliveryStreet: string,
     deliveryDate: string,
-    creditCard: number
+    creditCard: number,
+    invoice: {}
   ) {
     try {
+      console.log('Here');
       await fetch(`http://localhost:1000/orders/neworder`, {
         method: 'POST',
         headers: {
@@ -441,9 +443,18 @@ export class DataService {
           deliveryStreet,
           deliveryDate,
           creditCard,
+          invoice,
         }),
       });
       await this.getAllProds();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getInvoice() {
+    try {
+      await fetch(`http://localhost:1000/orders/invoice`);
     } catch (error) {
       console.log(error);
     }

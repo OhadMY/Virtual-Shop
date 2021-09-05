@@ -25,6 +25,7 @@ router.post("/neworder", verifyUser, async (req, res) => {
       deliveryStreet,
       deliveryDate,
       creditCard,
+      invoice,
     } = req.body;
     if (
       !userId ||
@@ -37,6 +38,8 @@ router.post("/neworder", verifyUser, async (req, res) => {
     ) {
       return res.status(400).send("Missing some info...");
     }
+    invoiceData = invoice;
+
     const newProd = await myQuery(
       `INSERT INTO orders (userId,cartId,totalPrice,deliveryCity,deliveryStreet,deliveryDate,creditCard) VALUES (${userId},${cartId},${totalPrice},"${deliveryCity}","${deliveryStreet}","${deliveryDate}",${creditCard})`
     );
@@ -46,37 +49,13 @@ router.post("/neworder", verifyUser, async (req, res) => {
   }
 });
 
+let invoiceData;
+
 router.get("/invoice", (req, res, next) => {
   const stream = res.writeHead(200, {
     "Content-Type": "application/pdf",
     "Content-Disposition": "attachment;filename=invoice.pdf",
   });
-
-  const invoiceData = {
-    shipping: {
-      name: "Styx San",
-      street: "Yefe Nof",
-      city: "Nahariya",
-    },
-    items: [
-      {
-        item: "TC 100",
-        description: "Toner Cartridge",
-        quantity: 2,
-        amount: 6000,
-      },
-      {
-        item: "USB_EXT",
-        description: "USB Cable Extender",
-        quantity: 1,
-        amount: 2000,
-      },
-    ],
-    subtotal: 8000,
-    paid: 0,
-    invoice_nr: 1,
-  };
-
   pdfService.buildPDF(
     (chunk) => stream.write(chunk),
     () => stream.end(),

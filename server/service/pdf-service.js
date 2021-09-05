@@ -42,13 +42,18 @@ function buildPDF(dataCallback, endCallback, invoiceData) {
   }
 
   function generateCustomerInformation(doc, invoice) {
-    const shipping = invoice.shipping;
-
     doc
-      .text(`Invoice Number: ${invoice.invoice_nr}`, 50, 200)
-      .text(`Invoice Date: ${new Date().toLocaleDateString("he-IL")}`, 50, 215)
-      .text(shipping.name, 300, 200)
-      .text(`${shipping.city}, ${shipping.street}`, 300, 215)
+      .fontSize(16)
+      .text(`Order Receipt`, 50, 150, { align: "center", width: 500 })
+      // .text(`Invoice Date: ${new Date().toLocaleDateString("he-IL")}`, 50, 215)
+      .fontSize(10)
+      .text(`Delivery Date: ${invoice.deliveryDate}`, 50, 200)
+      .text(`Name: ${invoice.firstName}, ${invoice.lastName}`, 50, 215)
+      .text(
+        `Adress: ${invoice.deliveryCity}, ${invoice.deliveryStreet}`,
+        50,
+        230
+      )
       .moveDown();
   }
 
@@ -77,16 +82,16 @@ function buildPDF(dataCallback, endCallback, invoiceData) {
     generateHr(doc, invoiceTableTop + 20);
     doc.font("Helvetica");
 
-    for (i = 0; i < invoice.items.length; i++) {
-      const item = invoice.items[i];
+    for (i = 0; i < invoice.cartItems.length; i++) {
+      const prod = invoice.cartItems[i];
       const position = invoiceTableTop + (i + 1) * 30;
       generateTableRow(
         doc,
         position,
-        item.description,
-        item.amount / item.quantity,
-        item.quantity,
-        item.amount
+        prod.prodName,
+        prod.prodPrice + "$",
+        prod.quantity,
+        prod.Total + "$"
       );
       generateHr(doc, position + 20);
     }
@@ -98,13 +103,13 @@ function buildPDF(dataCallback, endCallback, invoiceData) {
       "",
       "",
       "Total Price",
-      invoice.subtotal
+      invoice.totalPrice + "$"
     );
   }
 }
 
 function generateHr(doc, y) {
-  doc.strokeColor("#aaaaaa").lineWidth(1).moveTo(50, y).lineTo(550, y).stroke();
+  doc.strokeColor("#aaaaaa").lineWidth(1).moveTo(50, y).lineTo(570, y).stroke();
 }
 
 module.exports = { buildPDF };

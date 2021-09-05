@@ -18,6 +18,7 @@ export class OrderComponent implements OnInit {
   public requiredMsg: string = 'Field is required.';
   public minDate: Date;
   public unavailableDates = [];
+  public invoiceData: {};
   public deliveryCities: Array<string> = [
     'Jerusalem',
     'Tel Aviv',
@@ -93,21 +94,33 @@ export class OrderComponent implements OnInit {
     });
   };
 
-  orderFeedback() {
+  async orderFeedback() {
+    this.invoiceData = {
+      firstName: this.connectedUser.firstName,
+      lastName: this.connectedUser.lastName,
+      deliveryCity: this.orderForm.value.deliveryCity,
+      deliveryStreet: this.orderForm.value.deliveryStreet,
+      deliveryDate: moment(this.orderForm.value.deliveryDate)
+        .format('YYYY-MM-DD')
+        .toString(),
+      totalPrice: this.openCartTotalPrice,
+      cartItems: this._data.cartItems,
+    };
+
     let tempCard = this.orderForm.value.creditCard.toString();
     const lastFourDigits = parseInt(tempCard.slice(tempCard.length - 4));
     this._data.closeCart(this.openCart.shoppingCartId);
-    const res = this._data.createNewOrder(
+    this._data.createNewOrder(
       this.connectedUser.userId,
       this.openCart.shoppingCartId,
       this.openCartTotalPrice,
       this.orderForm.value.deliveryCity,
       this.orderForm.value.deliveryStreet,
       moment(this.orderForm.value.deliveryDate).format('YYYY-MM-DD').toString(),
-      lastFourDigits
+      lastFourDigits,
+      this.invoiceData
     );
-    console.log(res);
-    alert('Cart Closed');
-    this._r.navigate(['/home']);
+
+    // this._r.navigate(['/home']);
   }
 }
