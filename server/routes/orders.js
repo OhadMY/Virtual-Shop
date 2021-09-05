@@ -64,4 +64,25 @@ router.get("/invoice", (req, res, next) => {
   invoiceData = "";
 });
 
+router.get("/ordersdates", async (req, res) => {
+  try {
+    const allorders = await myQuery("SELECT deliveryDate FROM orders");
+    res.status(200).send(allorders);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.get("/carts/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const carts = await myQuery(
+      `SELECT count(userCartId) AS Carts FROM shoppingCarts WHERE userCartId=${userId}`
+    );
+    res.status(200).send(carts);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 module.exports = router;

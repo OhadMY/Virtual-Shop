@@ -451,4 +451,24 @@ export class DataService {
       console.log(error);
     }
   }
+
+  public async getOrdersDates() {
+    try {
+      const res = await fetch('http://localhost:1000/orders/ordersdates');
+      const orders = await res.json();
+      return orders;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getOrdersCarts(userId: number) {
+    try {
+      const res = await fetch(`http://localhost:1000/orders/carts/${userId}`);
+      const orders = await res.json();
+      return orders;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

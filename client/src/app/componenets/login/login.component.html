@@ -17,6 +17,12 @@
     <mat-card-subtitle *ngIf="openCart && openCartTotalPrice === 0">
       Empty Cart from {{ openCart.cartCreationTime }}
     </mat-card-subtitle>
+
+    <mat-card-subtitle
+      *ngIf="openCart && openCartTotalPrice === 0 && firstPurchase"
+    >
+      Welcome to your first purchase
+    </mat-card-subtitle>
   </div>
 
   <mat-card-actions *ngIf="isAdminConnected">

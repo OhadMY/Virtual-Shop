@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   public userName: string = null;
   public openCart: any = null;
   public openCartTotalPrice: number = null;
+  public firstPurchase: boolean = false;
 
   constructor(public _fb: FormBuilder, public _data: DataService) {}
 
@@ -45,6 +46,10 @@ export class LoginComponent implements OnInit {
           this.openCart.shoppingCartId
         );
       }
+      let cartsNumber = await this._data.getOrdersCarts(
+        decodedJwtData.user.userId
+      );
+      if (cartsNumber[0].Carts <= 1) this.firstPurchase = true;
     } catch (error) {
       this.isAuthenticated = false;
     }
