@@ -64,6 +64,7 @@ router.get("/invoice", (req, res, next) => {
   invoiceData = "";
 });
 
+// Test
 router.get("/ordersdates", async (req, res) => {
   try {
     const allorders = await myQuery("SELECT deliveryDate FROM orders");
@@ -72,6 +73,7 @@ router.get("/ordersdates", async (req, res) => {
     res.status(500).send(error);
   }
 });
+// Test
 
 router.get("/carts/:userId", async (req, res) => {
   try {
