@@ -19,6 +19,12 @@
             <mat-error *ngIf="registerForm1.get('id').errors?.min">
               ID must be 9 digits long.
             </mat-error>
+            <mat-error *ngIf="registerForm1.get('id').errors?.max">
+              ID must be 9 digits long.
+            </mat-error>
+            <mat-error *ngIf="registerForm1.get('id').errors?.isFound">
+              Test Error.
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field>

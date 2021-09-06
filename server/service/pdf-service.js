@@ -45,7 +45,6 @@ function buildPDF(dataCallback, endCallback, invoiceData) {
     doc
       .fontSize(16)
       .text(`Order Receipt`, 50, 150, { align: "center", width: 500 })
-      // .text(`Invoice Date: ${new Date().toLocaleDateString("he-IL")}`, 50, 215)
       .fontSize(10)
       .text(`Delivery Date: ${invoice.deliveryDate}`, 50, 200)
       .text(`Name: ${invoice.firstName} ${invoice.lastName}`, 50, 215)

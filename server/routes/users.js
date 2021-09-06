@@ -1,18 +1,9 @@
 const router = require("express").Router();
 const { myQuery } = require("../db");
-const { verifyUser } = require("../helpers/verifyUser");
 
 const jwt = require("jsonwebtoken");
 
 const bcrypt = require("bcrypt");
-
-router.get("/me", verifyUser, async (req, res) => {
-  const user = await myQuery(
-    `SELECT * FROM users WHERE userID = "${req.user.userID}"`
-  );
-  if (user && user.length === 1) delete user[0].userPassword;
-  res.json(user[0]);
-});
 
 router.post("/logout", async (req, res, next) => {
   res.cookie("token", "", {
@@ -105,6 +96,34 @@ router.post("/register", async (req, res) => {
     myQuery(`INSERT INTO shoppingCarts (userCartId) VALUES (${userId});`);
     res.status(201).send(newUser);
   } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+router.get("/idvalidation/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const result = await myQuery(
+      `SELECT COUNT(userId) AS userExists FROM users WHERE userId=${userId};`
+    );
+    const data = result[0].userExists;
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+});
+
+router.get("/mailvalidation/:eMail", async (req, res) => {
+  const { eMail } = req.params;
+  try {
+    const result = await myQuery(
+      `SELECT COUNT(eMail) AS userExists FROM users WHERE eMail="${eMail}";`
+    );
+    const data = result[0].userExists;
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
     res.status(500).send(error);
   }
 });
