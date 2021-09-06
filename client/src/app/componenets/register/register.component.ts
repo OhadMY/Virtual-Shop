@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
-import { passwordValidator, idValidator } from './custom-validators';
+import {
+  passwordValidator,
+  idValidator,
+  emailValidator,
+} from './custom-validators';
 
 @Component({
   selector: 'app-register',
@@ -50,7 +54,13 @@ export class RegisterComponent implements OnInit {
         ],
         userName: [
           null,
-          [Validators.required, Validators.pattern(this.eMailPattern)],
+          {
+            validators: [
+              Validators.required,
+              Validators.pattern(this.eMailPattern),
+            ],
+            asyncValidators: [emailValidator],
+          },
         ],
         password: [null, Validators.required],
         passwordConfirm: [null, Validators.required],
@@ -85,9 +95,5 @@ export class RegisterComponent implements OnInit {
 
   requiredValidation2(field: string) {
     return this.registerForm2.get(field).errors?.required;
-  }
-
-  get courseTitle() {
-    return this.registerForm1.value.errors?.isFound;
   }
 }

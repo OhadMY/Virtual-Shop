@@ -20,8 +20,19 @@ export const idValidator: AsyncValidatorFn = async (
   control: AbstractControl
 ): Promise<ValidationErrors> => {
   const userId = control.value;
-  console.log(userId);
   const res = await fetch(`http://localhost:1000/users/idvalidation/${userId}`);
+  const data = await res.json();
+  return data ? { isFound: true } : null;
+};
+
+export const emailValidator: AsyncValidatorFn = async (
+  control: AbstractControl
+): Promise<ValidationErrors> => {
+  const eMail = control.value;
+  console.log(eMail);
+  const res = await fetch(
+    `http://localhost:1000/users/mailvalidation/${eMail}`
+  );
   console.log(res);
   const data = await res.json();
   console.log(data);

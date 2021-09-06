@@ -23,7 +23,7 @@
               ID must be 9 digits long.
             </mat-error>
             <mat-error *ngIf="registerForm1.get('id').errors?.isFound">
-              Test Error.
+              ID is already in use.
             </mat-error>
           </mat-form-field>
 
@@ -37,8 +37,14 @@
             <mat-error *ngIf="requiredValidation1('userName')">
               {{ requiredMsg }}
             </mat-error>
-            <mat-error *ngIf="registerForm1.get('userName').errors?.email">
+            <!-- Fix Message here -->
+            <mat-error
+              *ngIf="registerForm1.get('userName').errors?.eMailPattern"
+            >
               Please provide a valid Email address.
+            </mat-error>
+            <mat-error *ngIf="registerForm1.get('userName').errors?.isFound">
+              eMail is already in use.
             </mat-error>
           </mat-form-field>
 
