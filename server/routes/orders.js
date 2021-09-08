@@ -40,10 +40,10 @@ router.post("/neworder", verifyUser, async (req, res) => {
     }
     invoiceData = invoice;
 
-    const newProd = await myQuery(
+    const newOrder = await myQuery(
       `INSERT INTO orders (userId,cartId,totalPrice,deliveryCity,deliveryStreet,deliveryDate,creditCard) VALUES (${userId},${cartId},${totalPrice},"${deliveryCity}","${deliveryStreet}","${deliveryDate}",${creditCard})`
     );
-    res.status(200).send(newProd);
+    res.status(200).send(newOrder);
   } catch (error) {
     res.status(500).send(error);
   }
