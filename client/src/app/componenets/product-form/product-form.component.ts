@@ -12,6 +12,7 @@ export class ProductFormComponent implements OnInit {
   public productForm: FormGroup;
   public requiredMsg = 'Field is required.';
   public categories: Array<any> = [];
+  public selectedCategory: number;
 
   constructor(
     public _data: DataService,
@@ -49,5 +50,9 @@ export class ProductFormComponent implements OnInit {
     this._data.editMode = false;
     this.resetForm();
     this._data.getAllProds();
+  }
+
+  changeClient(value) {
+    this.selectedCategory = value;
   }
 }

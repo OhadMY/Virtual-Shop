@@ -64,7 +64,6 @@ export class StoreComponent implements OnInit {
   }
 
   editProduct(product: ProductsModel) {
-    console.log(product);
     this._data.prodForEdit = product;
     this._data.editMode = true;
   }

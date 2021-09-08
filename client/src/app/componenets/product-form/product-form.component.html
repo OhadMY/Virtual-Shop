@@ -134,11 +134,12 @@
         <mat-label>Category</mat-label>
         <mat-select
           required
-          [(value)]="categories[_data.prodForEdit.categoryId - 1].categoryName"
+          [(value)]="this._data.prodForEdit.categoryId"
+          (selectionChange)="changeClient($event.value)"
         >
           <mat-option
             *ngFor="let category of categories"
-            value="{{ category.categoryName }}"
+            [value]="category.prodCategoryId"
           >
             {{ category.categoryName }}
           </mat-option>
@@ -159,7 +160,9 @@
               productForm.value.name,
               productForm.value.price,
               productForm.value.image,
-              productForm.value.category_id
+              selectedCategory
+                ? selectedCategory
+                : this._data.prodForEdit.categoryId
             );
             confirmEdit()
           "
