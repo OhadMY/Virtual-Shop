@@ -1,8 +1,6 @@
 mat-card {
   width: 400px;
   margin: auto;
-  /* height: 400px; */
-  /* overflow-y: scroll; */
 }
 
 table {
@@ -57,4 +55,8 @@ img {
 
 td {
   text-align: center;
+}
+
+.highlightText {
+  background: yellow;
 }

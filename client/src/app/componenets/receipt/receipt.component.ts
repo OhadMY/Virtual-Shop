@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-receipt',
   templateUrl: './receipt.component.html',
   styleUrls: ['./receipt.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ReceiptComponent implements OnInit {
   public openCart: any = null;
@@ -16,6 +17,8 @@ export class ReceiptComponent implements OnInit {
     'price',
     'total',
   ];
+  private content: string;
+  public searchString: string;
 
   constructor(public _data: DataService) {}
 
@@ -28,6 +31,21 @@ export class ReceiptComponent implements OnInit {
     await this._data.GetAllCartProducts(this.openCart.shoppingCartId);
     this.openCartTotalPrice = await this._data.getTotalPrice(
       this.openCart.shoppingCartId
+    );
+  }
+
+  public highlight(prodName: string) {
+    this.content = prodName;
+
+    if (!this.searchString) {
+      return this.content;
+    }
+
+    return this.content.replace(
+      new RegExp(this.searchString, 'gi'),
+      (match) => {
+        return '<span class="highlightText">' + match + '</span>';
+      }
     );
   }
 }

@@ -8,7 +8,12 @@
   <mat-card-subtitle>
     <h3>Cart Preview</h3>
     <mat-form-field>
-      <input matInput type="text" placeholder="Search product" />
+      <input
+        matInput
+        type="text"
+        placeholder="Search product"
+        [(ngModel)]="searchString"
+      />
     </mat-form-field>
   </mat-card-subtitle>
 
@@ -35,7 +40,13 @@
       >
         Product
       </th>
-      <td mat-cell *matCellDef="let product">{{ product.prodName }}</td>
+      <td
+        mat-cell
+        *matCellDef="let product"
+        [innerHTML]="highlight(product.prodName)"
+      >
+        {{ highlight(product.prodName) }}
+      </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 

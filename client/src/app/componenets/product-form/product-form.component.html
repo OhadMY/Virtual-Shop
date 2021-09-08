@@ -132,10 +132,13 @@
 
       <mat-form-field>
         <mat-label>Category</mat-label>
-        <mat-select formControlName="category_id" required>
+        <mat-select
+          required
+          [(value)]="categories[_data.prodForEdit.categoryId - 1].categoryName"
+        >
           <mat-option
             *ngFor="let category of categories"
-            value="{{ category.prodCategoryId }}"
+            value="{{ category.categoryName }}"
           >
             {{ category.categoryName }}
           </mat-option>
