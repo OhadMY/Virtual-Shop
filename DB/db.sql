@@ -90,7 +90,7 @@ FOREIGN KEY (cartId) REFERENCES shoppingCarts(shoppingCartId),
 totalPrice INT,
 deliveryCity VARCHAR(60),
 deliveryStreet VARCHAR(60),
-deliveryDate DATE,
+deliveryDate VARCHAR(60),
 creditCard VARCHAR(4),
 orderCreationTime DATETIME DEFAULT NOW() NOT NULL,
 PRIMARY KEY (orderId)
