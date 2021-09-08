@@ -427,42 +427,25 @@ export class DataService {
     creditCard: number,
     invoice: {}
   ) {
-    try {
-      console.log('Here');
-      await fetch(`http://localhost:1000/orders/neworder`, {
-        method: 'POST',
-        headers: {
-          authorization: localStorage.token,
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId,
-          cartId,
-          totalPrice,
-          deliveryCity,
-          deliveryStreet,
-          deliveryDate,
-          creditCard,
-          invoice,
-        }),
-      });
-      await this.getAllProds();
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await fetch(`http://localhost:1000/orders/neworder`, {
+      method: 'POST',
+      headers: {
+        authorization: localStorage.token,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId,
+        cartId,
+        totalPrice,
+        deliveryCity,
+        deliveryStreet,
+        deliveryDate,
+        creditCard,
+        invoice,
+      }),
+    });
+    const data = await res.json();
   }
-
-  // Test
-  public async getOrdersDates() {
-    try {
-      const res = await fetch('http://localhost:1000/orders/ordersdates');
-      const orders = await res.json();
-      return orders;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  // Test
 
   public async getOrdersCarts(userId: number) {
     try {

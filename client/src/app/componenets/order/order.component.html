@@ -51,7 +51,6 @@
           [matDatepicker]="picker"
           formControlName="deliveryDate"
           [min]="minDate"
-          [matDatepickerFilter]="myFilter"
         />
         <mat-error *ngIf="requiredValidation('deliveryDate')">
           {{ requiredMsg }}

@@ -19,7 +19,6 @@ export class OrderComponent implements OnInit {
   public openCartTotalPrice: number = null;
   public requiredMsg: string = 'Field is required.';
   public minDate: Date;
-  public unavailableDates = [];
   public invoiceData: {};
   public deliveryCities: Array<string> = [
     'Jerusalem',
@@ -89,14 +88,6 @@ export class OrderComponent implements OnInit {
     return this.orderForm.get('creditCard').value;
   }
 
-  myFilter = (d: Date | null): boolean => {
-    const time = moment(d).format('YYYY-MM-DD');
-    if (!this.unavailableDates) return true;
-    return !this.unavailableDates.find((date) => {
-      return moment(date._id.deliveryDate).format('YYYY-MM-DD') === time;
-    });
-  };
-
   async orderFeedback() {
     this.invoiceData = {
       firstName: this.connectedUser.firstName,
@@ -113,21 +104,27 @@ export class OrderComponent implements OnInit {
     let tempCard = this.orderForm.value.creditCard.toString();
     const lastFourDigits = parseInt(tempCard.slice(tempCard.length - 4));
 
-    this._data.closeCart(this.openCart.shoppingCartId);
-    this._data.createNewOrder(
-      this.connectedUser.userId,
-      this.openCart.shoppingCartId,
-      this.openCartTotalPrice,
-      this.orderForm.value.deliveryCity,
-      this.orderForm.value.deliveryStreet,
-      moment(this.orderForm.value.deliveryDate).format('YYYY-MM-DD').toString(),
-      lastFourDigits,
-      this.invoiceData
-    );
-
-    let dialogRef = this.dialog.open(DownloadModalComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      this._r.navigate(['/home']);
-    });
+    try {
+      await this._data.createNewOrder(
+        this.connectedUser.userId,
+        this.openCart.shoppingCartId,
+        this.openCartTotalPrice,
+        this.orderForm.value.deliveryCity,
+        this.orderForm.value.deliveryStreet,
+        moment(this.orderForm.value.deliveryDate)
+          .format('YYYY-MM-DD')
+          .toString(),
+        lastFourDigits,
+        this.invoiceData
+      );
+      this._data.closeCart(this.openCart.shoppingCartId);
+      let dialogRef = this.dialog.open(DownloadModalComponent);
+      dialogRef.afterClosed().subscribe((result) => {
+        this._r.navigate(['/home']);
+      });
+    } catch (e) {
+      alert('Date already booked, please select a different date');
+      console.log(e);
+    }
   }
 }

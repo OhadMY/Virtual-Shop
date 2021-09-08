@@ -38,12 +38,22 @@ router.post("/neworder", verifyUser, async (req, res) => {
     ) {
       return res.status(400).send("Missing some info...");
     }
-    invoiceData = invoice;
-
-    const newOrder = await myQuery(
-      `INSERT INTO orders (userId,cartId,totalPrice,deliveryCity,deliveryStreet,deliveryDate,creditCard) VALUES (${userId},${cartId},${totalPrice},"${deliveryCity}","${deliveryStreet}","${deliveryDate}",${creditCard})`
+    const dateCounter = await myQuery(
+      `SELECT count(deliveryDate) as count FROM orders WHERE deliveryDate="${deliveryDate}";`
     );
-    res.status(200).send(newOrder);
+    console.log("Test result", dateCounter[0].count);
+    if (dateCounter[0].count >= 3) {
+      return res
+        .status(400)
+        .send("Date already booked, please select a different date");
+    } else {
+      invoiceData = invoice;
+      const newOrder = await myQuery(
+        `INSERT INTO orders (userId,cartId,totalPrice,deliveryCity,deliveryStreet,deliveryDate,creditCard) VALUES (${userId},${cartId},${totalPrice},"${deliveryCity}","${deliveryStreet}","${deliveryDate}",${creditCard})`
+      );
+
+      res.status(200).send(newOrder);
+    }
   } catch (error) {
     res.status(500).send(error);
   }
