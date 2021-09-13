@@ -109,6 +109,18 @@ export class DataService {
     }
   }
 
+  public async getLastUserCart(userId: number) {
+    try {
+      const res = await fetch(
+        `http://localhost:1000/shoppingcarts/lastusercart/${userId}`
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   public async getTotalPrice(shoppingCartId: number) {
     try {
       const res = await fetch(

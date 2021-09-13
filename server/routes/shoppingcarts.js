@@ -22,6 +22,25 @@ router.get("/usercart/:userId", async (req, res) => {
   }
 });
 
+router.get("/lastusercart/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const shoppingCartId = await myQuery(
+      `SELECT * FROM shoppingCarts WHERE userCartId = ${userId} AND cartStatus=1 ORDER BY shoppingCartId DESC LIMIT 1;`
+    );
+    const totalPrice = await myQuery(
+      `SELECT SUM(prodInCart.quantity * products.prodPrice) AS Total
+      FROM prodInCart JOIN products ON prodInCart.prodCartId = products.prodId WHERE cartId=${shoppingCartId[0].shoppingCartId} GROUP BY prodInCart.cartId ;`
+    );
+    res.status(200).send({
+      totalPrice: totalPrice[0].Total,
+      cartCreationTime: shoppingCartId[0].cartCreationTime,
+    });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.get("/totalprice/:shoppingCartId", async (req, res) => {
   const { shoppingCartId } = req.params;
   try {

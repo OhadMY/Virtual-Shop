@@ -10,7 +10,7 @@
     </mat-card-actions>
 
     <mat-card-subtitle *ngIf="openCart && openCartTotalPrice !== 0">
-      Open Cart ${{ openCartTotalPrice }} from
+      Open cart total is ${{ openCartTotalPrice }} from
       {{ openCart.cartCreationTime }}
     </mat-card-subtitle>
 
@@ -22,6 +22,13 @@
       *ngIf="openCart && openCartTotalPrice === 0 && firstPurchase"
     >
       Welcome to your first purchase
+    </mat-card-subtitle>
+
+    <mat-card-subtitle
+      *ngIf="lastUserCart.totalPrice && lastUserCart.cartCreationTime"
+    >
+      Last cart total was ${{ lastUserCart.totalPrice }} from
+      {{ lastUserCart.cartCreationTime }}
     </mat-card-subtitle>
   </div>
 

@@ -1,5 +1,6 @@
 .image {
   width: 320px;
+  max-height: 193px;
   display: flex;
   margin: auto;
   padding-bottom: 15px;

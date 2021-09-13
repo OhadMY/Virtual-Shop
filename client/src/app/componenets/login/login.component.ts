@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   public openCart: any = null;
   public openCartTotalPrice: number = null;
   public firstPurchase: boolean = false;
+  public lastUserCart: any = null;
 
   constructor(public _fb: FormBuilder, public _data: DataService) {}
 
@@ -45,6 +46,12 @@ export class LoginComponent implements OnInit {
         this.openCartTotalPrice = await this._data.getTotalPrice(
           this.openCart.shoppingCartId
         );
+        this.lastUserCart = await this._data.getLastUserCart(
+          decodedJwtData.user.userId
+        );
+        this.lastUserCart.cartCreationTime = moment(
+          this.lastUserCart.cartCreationTime
+        ).format('DD-MM-YYYY');
       }
       let cartsNumber = await this._data.getOrdersCarts(
         decodedJwtData.user.userId
