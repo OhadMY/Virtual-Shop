@@ -24,9 +24,7 @@
       Welcome to your first purchase
     </mat-card-subtitle>
 
-    <mat-card-subtitle
-      *ngIf="lastUserCart.totalPrice && lastUserCart.cartCreationTime"
-    >
+    <mat-card-subtitle *ngIf="lastUserCart">
       Last cart total was ${{ lastUserCart.totalPrice }} from
       {{ lastUserCart.cartCreationTime }}
     </mat-card-subtitle>

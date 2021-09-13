@@ -114,8 +114,12 @@ export class DataService {
       const res = await fetch(
         `http://localhost:1000/shoppingcarts/lastusercart/${userId}`
       );
-      const data = await res.json();
-      return data;
+      if (res.status === 200) {
+        const data = await res.json();
+        return data;
+      } else {
+        return null;
+      }
     } catch (error) {
       console.log(error);
     }

@@ -49,9 +49,10 @@ export class LoginComponent implements OnInit {
         this.lastUserCart = await this._data.getLastUserCart(
           decodedJwtData.user.userId
         );
-        this.lastUserCart.cartCreationTime = moment(
-          this.lastUserCart.cartCreationTime
-        ).format('DD-MM-YYYY');
+        if (this.lastUserCart)
+          this.lastUserCart.cartCreationTime = moment(
+            this.lastUserCart.cartCreationTime
+          ).format('DD-MM-YYYY');
       }
       let cartsNumber = await this._data.getOrdersCarts(
         decodedJwtData.user.userId
